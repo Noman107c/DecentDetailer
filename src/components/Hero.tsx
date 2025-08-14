@@ -1,0 +1,113 @@
+
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import { Circle } from "lucide-react";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
+const Hero = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [isMounted, setIsMounted] = useState(false);
+  
+  // Images for the carousel
+  const images = [
+    "https://images.unsplash.com/photo-1605557202210-55aef6a7bc97?q=80&w=1920&auto=format&fit=crop", 
+    "https://images.unsplash.com/photo-1635260428481-8236b236ef23?q=80&w=1920&auto=format&fit=crop", 
+    "https://images.unsplash.com/photo-1600979576531-397b9a3fee72?q=80&w=1920&auto=format&fit=crop"  
+  ];
+  
+  useEffect(() => {
+    setIsMounted(true);
+    
+    // Auto-advance slides
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % images.length);
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [images.length]);
+
+  if (!isMounted) {
+    return <div className="min-h-screen bg-decent-dark"></div>;
+  }
+
+  return (
+    <div className="relative min-h-[90vh] overflow-hidden bg-decent-dark">
+      {/* Background overlay and gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/70 to-black/50 z-10" />
+      
+      {/* Background image */}
+      {images.map((image, index) => (
+        <div 
+          key={index}
+          className={`absolute inset-0 transition-opacity duration-1000 ${
+            index === currentSlide ? "opacity-100" : "opacity-0"
+          }`}
+        >
+          <img 
+            src={image} 
+            alt={`Mobile car detailing ${index + 1}`}
+            className="w-full h-full object-cover"
+          />
+        </div>
+      ))}
+      
+      {/* Content */}
+      <div className="container mx-auto px-4 h-full flex items-center relative z-20">
+        <div className="w-full md:w-2/3 lg:w-1/2 py-20 md:py-32">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4">
+              Mobile Detailing <br />
+              <span className="text-decent-lightBlue">Wherever You Park</span>
+            </h1>
+            
+            <p className="text-white/90 text-lg md:text-xl mb-8 max-w-md">
+              Showroom-quality results brought directly to your doorstep with our premium mobile car detailing service.
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Link href="/booking">
+                <Button className="bg-decent-lightBlue hover:bg-decent-blue text-white px-8 py-6 text-lg">
+                  Book Appointment
+                </Button>
+              </Link>
+              <Link href="/services">
+                <Button variant="outline" className="bg-transparent border-white text-white hover:bg-white/10 px-8 py-6 text-lg">
+                  Our Services
+                </Button>
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </div>
+      
+      {/* Dot navigation */}
+      <div className="absolute right-6 top-1/2 transform -translate-y-1/2 flex flex-col gap-3 z-20">
+        {images.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentSlide(index)}
+            className="focus:outline-none"
+          >
+            <Circle 
+              className={`${
+                index === currentSlide 
+                  ? "text-decent-lightBlue fill-decent-lightBlue" 
+                  : "text-white/60"
+              } transition-colors`}
+              size={14}
+            />
+          </button>
+        ))}
+      </div>
+      
+      {/* Wave separator removed to match the design in the image */}
+    </div>
+  );
+};
+
+export default Hero;
