@@ -1,0 +1,8 @@
+{
+  "/booking/page": "app/booking/page.js",
+  "/page": "app/page.js",
+  "/services/car-detailing/page": "app/services/car-detailing/page.js",
+  "/services/window-tinting/page": "app/services/window-tinting/page.js",
+  "/contact/page": "app/contact/page.js",
+  "/services/ceramic-coating/page": "app/services/ceramic-coating/page.js"
+}
