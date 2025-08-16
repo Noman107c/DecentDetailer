@@ -257,7 +257,7 @@ const WindowTinting = () => {
           </div>
         </div>
       </div>
-      <Footer />
+     
     </>
   );
 };

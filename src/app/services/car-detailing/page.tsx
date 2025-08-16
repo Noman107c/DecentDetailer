@@ -9,7 +9,7 @@ export default function CarDetailingPage() {
     <div className="min-h-screen">
       <Navbar />
       <CarDetailing />
-      <Footer />
+  
     </div>
   );
 } 

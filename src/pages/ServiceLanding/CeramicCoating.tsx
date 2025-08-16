@@ -271,7 +271,7 @@ const CeramicCoating = () => {
           </div>
         </div>
       </div>
-      <Footer />
+    
     </>
   );
 };

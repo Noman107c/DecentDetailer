@@ -1220,7 +1220,7 @@ const Booking = () => {
         details={getConfirmationDetails()}
       />
       
-      <Footer />
+    
     </div>
   );
 };

@@ -219,7 +219,7 @@ const CarDetailing = () => {
           </div>
         </div>
       </div>
-      <Footer />
+   
     </>
   );
 };

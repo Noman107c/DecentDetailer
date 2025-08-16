@@ -9,7 +9,7 @@ export default function BookingPage() {
     <div className="min-h-screen">
       <Navbar />
       <Booking />
-      <Footer />
+     
     </div>
   );
 } 

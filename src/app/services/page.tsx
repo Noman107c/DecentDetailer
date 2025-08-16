@@ -9,7 +9,7 @@ export default function ServicesPage() {
     <div className="min-h-screen">
       <Navbar />
       <Services />
-      <Footer />
+ 
     </div>
   );
 } 

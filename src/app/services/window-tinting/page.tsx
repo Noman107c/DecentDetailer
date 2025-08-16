@@ -9,7 +9,7 @@ export default function WindowTintingPage() {
     <div className="min-h-screen">
       <Navbar />
       <WindowTinting />
-      <Footer />
+   
     </div>
   );
 } 

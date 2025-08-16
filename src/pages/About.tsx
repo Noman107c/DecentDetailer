@@ -121,7 +121,7 @@ const About = () => {
         </div>
       </div>
       
-      <Footer />
+   
     </div>
   );
 };

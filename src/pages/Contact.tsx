@@ -213,7 +213,7 @@ const Contact = () => {
         description={`Thank you ${formData.name}! We've received your message and will get back to you as soon as possible at ${formData.email}.`}
       />
       
-      <Footer />
+     
     </div>
   );
 };
