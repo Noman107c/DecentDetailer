@@ -106,7 +106,7 @@ const WindowTinting = () => {
                   <span className="text-gray-700">2-4 hour installation</span>
                 </div>
               </div>
-              <Link to="/booking?service=standard-tint" className="block">
+              <Link href="/booking?service=standard-tint" className="block">
                 <Button className="w-full bg-decent-blue hover:bg-decent-lightBlue text-white">
                   Select Package
                 </Button>
@@ -148,7 +148,7 @@ const WindowTinting = () => {
                   <span className="text-gray-700">2-4 hour installation</span>
                 </div>
               </div>
-              <Link to="/booking?service=premium-tint" className="block">
+              <Link href="/booking?service=premium-tint" className="block">
                 <Button className="w-full bg-decent-lightBlue hover:bg-decent-blue text-white">
                   Select Package
                 </Button>
@@ -187,7 +187,7 @@ const WindowTinting = () => {
                   <span className="text-gray-700">Scratch-resistant coating</span>
                 </div>
               </div>
-              <Link to="/booking?service=luxury-tint" className="block">
+              <Link href="/booking?service=luxury-tint" className="block">
                 <Button className="w-full bg-decent-blue hover:bg-decent-lightBlue text-white">
                   Select Package
                 </Button>
@@ -243,12 +243,12 @@ const WindowTinting = () => {
               Schedule your window tinting appointment today and enjoy a cooler, more comfortable ride with enhanced privacy.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Link to="/booking">
+              <Link href="/booking">
                 <Button className="bg-white text-decent-blue hover:bg-decent-lightBlue hover:text-white">
                   Book Now
                 </Button>
               </Link>
-              <Link to="/contact">
+              <Link href="/contact">
                 <Button variant="outline" className="border-white text-white hover:bg-white hover:text-decent-blue">
                   Contact Us
                 </Button>
