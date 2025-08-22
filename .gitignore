@@ -36,3 +36,7 @@ out/
 
 # Optional: OS / misc
 Thumbs.db
+# Env files
+.env
+.env.local
+.env.*.local

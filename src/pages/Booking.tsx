@@ -227,13 +227,20 @@ const handleSelectChange = (name: string, value: string) => {
       // Log what we're sending for debugging
       console.log("Sending form data to Formspree");
       
-      const response = await fetch('https://formspree.io/f/mvgalbky', {
+      // const response = await fetch('https://formspree.io/f/mvgalbky', {
+      //   method: 'POST',
+      //   body: formspreeData,
+      //   headers: {
+      //     'Accept': 'application/json'
+      //   }
+      // });
+
+      const response = await fetch('/api/book', {
         method: 'POST',
-        body: formspreeData,
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       });
+      
       
       if (response.ok) {
         // Important: Store the form data for the confirmation modal
