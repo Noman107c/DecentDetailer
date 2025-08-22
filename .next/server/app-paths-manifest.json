@@ -1,6 +1,0 @@
-{
-  "/page": "app/page.js",
-  "/services/car-detailing/page": "app/services/car-detailing/page.js",
-  "/services/window-tinting/page": "app/services/window-tinting/page.js",
-  "/booking/page": "app/booking/page.js"
-}

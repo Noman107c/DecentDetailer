@@ -45,7 +45,7 @@ const FeaturedWorks = () => {
       description: "Premium ceramic coating application",
       before: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=600&auto=format&fit=crop",
       after: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=600&auto=format&fit=crop",
-         link: "/services/ceramics"
+         link: "/services/ceramic-coating"
     },
     {
       id: 4,
