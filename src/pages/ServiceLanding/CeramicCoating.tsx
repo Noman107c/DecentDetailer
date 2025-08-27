@@ -43,7 +43,11 @@ const CeramicCoating = () => {
                     <span className="text-sm font-medium">2-5 Year Protection</span>
                   </div>
                 </div>
+<<<<<<< HEAD
+                <Link href="/booking?service=ceramic-coating">
+=======
                 <Link to="/booking?service=ceramic-coating">
+>>>>>>> origin/main
                   <Button className="bg-decent-lightBlue hover:bg-decent-blue text-white group">
                     Book Ceramic Coating Now
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -106,7 +110,11 @@ const CeramicCoating = () => {
                   <span className="text-gray-700">Enhanced gloss finish</span>
                 </div>
               </div>
+<<<<<<< HEAD
+              <Link href="/booking?service=basic-ceramic" className="block">
+=======
               <Link to="/booking?service=basic-ceramic" className="block">
+>>>>>>> origin/main
                 <Button className="w-full bg-decent-blue hover:bg-decent-lightBlue text-white">
                   Select Package
                 </Button>
@@ -148,7 +156,11 @@ const CeramicCoating = () => {
                   <span className="text-gray-700">Chemical resistance</span>
                 </div>
               </div>
+<<<<<<< HEAD
+              <Link href="/booking?service=premium-ceramic" className="block">
+=======
               <Link to="/booking?service=premium-ceramic" className="block">
+>>>>>>> origin/main
                 <Button className="w-full bg-decent-lightBlue hover:bg-decent-blue text-white">
                   Select Package
                 </Button>
@@ -191,7 +203,11 @@ const CeramicCoating = () => {
                   <span className="text-gray-700">UV protection</span>
                 </div>
               </div>
+<<<<<<< HEAD
+              <Link href="/booking?service=luxury-ceramic" className="block">
+=======
               <Link to="/booking?service=luxury-ceramic" className="block">
+>>>>>>> origin/main
                 <Button className="w-full bg-decent-blue hover:bg-decent-lightBlue text-white">
                   Select Package
                 </Button>
@@ -257,12 +273,20 @@ const CeramicCoating = () => {
               Schedule your ceramic coating appointment and give your vehicle the ultimate protection with a stunning glossy finish.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
+<<<<<<< HEAD
+              <Link href="/booking">
+=======
               <Link to="/booking">
+>>>>>>> origin/main
                 <Button className="bg-white text-decent-blue hover:bg-decent-lightBlue hover:text-white">
                   Book Now
                 </Button>
               </Link>
+<<<<<<< HEAD
+              <Link href="/contact">
+=======
               <Link to="/contact">
+>>>>>>> origin/main
                 <Button variant="outline" className="border-white text-white hover:bg-white hover:text-decent-blue">
                   Contact Us
                 </Button>
@@ -271,7 +295,11 @@ const CeramicCoating = () => {
           </div>
         </div>
       </div>
+<<<<<<< HEAD
+    
+=======
       <Footer />
+>>>>>>> origin/main
     </>
   );
 };

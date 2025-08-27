@@ -211,7 +211,7 @@ const CarDetailing = () => {
                 </Button>
               </Link>
               <Link href="/contact">
-                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-decent-blue">
+                <Button variant="outline" className="bg-white text-decent-blue hover:bg-decent-lightBlue hover:text-white">
                   Contact Us
                 </Button>
               </Link>
@@ -219,7 +219,7 @@ const CarDetailing = () => {
           </div>
         </div>
       </div>
-      <Footer />
+   
     </>
   );
 };

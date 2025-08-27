@@ -9,7 +9,7 @@ export default function ContactPage() {
     <div className="min-h-screen">
       <Navbar />
       <Contact />
-      <Footer />
+    
     </div>
   );
 } 

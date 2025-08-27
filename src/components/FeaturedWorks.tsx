@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
+import Link from "next/link";
+
 import {
   Carousel,
   CarouselContent,
@@ -14,6 +16,8 @@ import {
 
 const FeaturedWorks = () => {
   const [activeTab, setActiveTab] = useState("all");
+
+
   
   const beforeAfterImages = [
     {
@@ -22,7 +26,8 @@ const FeaturedWorks = () => {
       title: "Exterior Detail",
       description: "Full exterior restoration on a black sedan",
       before: "https://images.unsplash.com/photo-1635260597798-98a63db5d2b0?q=80&w=600&auto=format&fit=crop",
-      after: "https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=600&auto=format&fit=crop"
+      after: "https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=600&auto=format&fit=crop",
+      link: "/services/car-detailing"
     },
     {
       id: 2,
@@ -30,7 +35,8 @@ const FeaturedWorks = () => {
       title: "Interior Transformation",
       description: "Complete interior cleaning and restoration",
       before: "https://images.unsplash.com/photo-1597007066704-67bf2068d5b2?q=80&w=600&auto=format&fit=crop",
-      after: "https://images.unsplash.com/photo-1606073716823-e2dde8c3fd16?q=80&w=600&auto=format&fit=crop"
+      after: "https://images.unsplash.com/photo-1606073716823-e2dde8c3fd16?q=80&w=600&auto=format&fit=crop",
+          link: "/services/car-detailing"
     },
     {
       id: 3,
@@ -38,7 +44,8 @@ const FeaturedWorks = () => {
       title: "Ceramic Coating",
       description: "Premium ceramic coating application",
       before: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=600&auto=format&fit=crop",
-      after: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=600&auto=format&fit=crop"
+      after: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=600&auto=format&fit=crop",
+         link: "/services/ceramic-coating"
     },
     {
       id: 4,
@@ -46,7 +53,8 @@ const FeaturedWorks = () => {
       title: "Window Tint",
       description: "Professional window tinting service",
       before: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=600&auto=format&fit=crop",
-      after: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=600&auto=format&fit=crop"
+      after: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=600&auto=format&fit=crop",
+         link: "/services/window-tinting"
     }
   ];
   
@@ -164,9 +172,14 @@ const FeaturedWorks = () => {
                       <div className="p-6 bg-white border-t-2 border-decent-light">
                         <h3 className="text-xl font-bold text-decent-blue group-hover:text-decent-lightBlue transition-colors duration-300">{item.title}</h3>
                         <p className="text-gray-600">{item.description}</p>
-                        <Button variant="link" className="text-decent-lightBlue p-0 mt-2 hover:text-decent-blue transition-colors">
-                          View Details <ChevronRight className="ml-1 h-4 w-4" />
-                        </Button>
+                        <Link href={item.link}>
+  <Button
+    variant="link"
+    className="text-decent-lightBlue p-0 mt-2 hover:text-decent-blue transition-colors"
+  >
+    View Details <ChevronRight className="ml-1 h-4 w-4" />
+  </Button>
+</Link>
                       </div>
                     </div>
                   </CardContent>

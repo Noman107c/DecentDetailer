@@ -9,7 +9,7 @@ export default function AboutPage() {
     <div className="min-h-screen">
       <Navbar />
       <About />
-      <Footer />
+  
     </div>
   );
 } 

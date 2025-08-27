@@ -1,9 +1,9 @@
 
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
-import ServicesSection from "@/components/ServicesSection";
+import ServicesSection from "@/components/services/ServicesSection";
 import AboutSection from "@/components/AboutSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
+import TestimonialsSection from "@/components/testimonial/TestimonialsSection";
 import CtaSection from "@/components/CtaSection";
 import Footer from "@/components/Footer";
 import FeaturedWorks from "@/components/FeaturedWorks";

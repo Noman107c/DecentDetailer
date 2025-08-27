@@ -1,7 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+
 import ConfirmationModal from "@/components/ConfirmationModal";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,143 +9,24 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
+
+
 // import { Calendar } from "@/components/ui/calendar";
+
 // import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-// import { format } from "date-fns";
-import { CalendarIcon, Car, Clock, MapPin, Check } from "lucide-react";
+import { format } from "date-fns";
+import { CalendarIcon, Car, Clock, MapPin, Check,} from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
+import { serviceTypes, additionalServices, vehicleTypes, timeSlots, usStates } from "@/utils/services";
+import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
+import { Calendar } from "@/components/ui/calendar";
+import { getAdminEmailTemplate, getUserEmailTemplate, getVehicleTypeName } from "@/utils/email";
 
-// Service types and packages
-const serviceTypes = [
-  {
-    id: "car-detailing",
-    name: "Car Detailing",
-    description: "Professional detailing services for your vehicle",
-    packages: [
-      { id: "basic-wash", name: "Basic Wash Package", price: "$150", description: "Exterior hand wash, tire dressing, basic rim cleaning, window cleaning" },
-      { id: "premium-exterior", name: "Premium Exterior Package", price: "$190", description: "Basic + clay bar treatment, hand wax, wheel well cleaning, trim treatment" },
-      { id: "basic-interior", name: "Basic Interior Package", price: "$170", description: "Complete vacuuming, dashboard/console cleaning, door panels, basic mat cleaning" },
-      { id: "premium-interior", name: "Premium Interior Package", price: "$220", description: "Basic + leather/vinyl conditioning, carpet shampooing, headliner cleaning, odor elimination" },
-      { id: "full-basic", name: "Full Basic Detail", price: "$220", description: "Basic Exterior + Basic Interior" },
-      { id: "full-premium", name: "Full Premium Detail", price: "$299", description: "Premium Exterior + Premium Interior + Engine bay cleaning, Interior UV protectant" }
-    ],
-  },
-  {
-    id: "window-tinting",
-    name: "Window Tinting",
-    description: "Professional window tinting services",
-    packages: [
-      { id: "basic-tint", name: "Basic Tint Package", price: "$199", description: "Standard tint for all side windows" },
-      { id: "premium-tint", name: "Premium Tint Package", price: "$299", description: "Premium ceramic tint for all side windows" },
-      { id: "full-tint", name: "Full Vehicle Tint", price: "$399", description: "Premium tint for all windows including windshield strip" },
-    ],
-  },
-  {
-    id: "ceramic-coating",
-    name: "Ceramic Coating",
-    description: "Long-lasting protection for your vehicle",
-    packages: [
-      { id: "basic-ceramic", name: "Basic Ceramic Package", price: "$400", description: "6-month ceramic coating application" },
-      { id: "premium-ceramic", name: "Premium Ceramic Package", price: "$700", description: "1-year ceramic coating with paint correction" },
-      { id: "elite-ceramic", name: "Elite Ceramic Package", price: "$1200", description: "2-year ceramic coating with full paint correction" },
-    ],
-  },
-  {
-    id: "specialty",
-    name: "Specialty Vehicles",
-    description: "Services for RVs, boats, and other specialty vehicles",
-    packages: [
-      { id: "rv-detailing", name: "RV Detailing", price: "$25-50/ft", description: "Comprehensive detailing for your RV" },
-      { id: "boat-detailing", name: "Boat Detailing", price: "$25-50/ft", description: "Complete detailing for boats and watercraft" },
-      { id: "boat-tinting", name: "Boat Window Tinting", price: "Custom", description: "Custom window tinting for boats" },
-    ],
-  }
-];
-
-// Add-on services
-const additionalServices = [
-  { id: "headlight-restoration", name: "Headlight Restoration", price: "$99", category: "exterior" },
-  { id: "paint-correction", name: "Paint Correction", price: "$150+", category: "exterior" },
-  { id: "engine-detailing", name: "Engine Bay Detailing", price: "$75", category: "exterior" },
-  { id: "pet-hair-removal", name: "Pet Hair Removal", price: "$40", category: "interior" },
-  { id: "stain-removal", name: "Stain Removal", price: "$60", category: "interior" },
-  { id: "odor-treatment", name: "Odor Bomb Treatment", price: "$50", category: "interior" },
-  { id: "fabric-protection", name: "Fabric Protection", price: "$80", category: "protection" },
-  { id: "leather-conditioning", name: "Leather Conditioning", price: "$60", category: "protection" },
-];
-
-// Vehicle types
-const vehicleTypes = [
-  { id: "sedan", name: "Sedan" },
-  { id: "suv", name: "SUV" },
-  { id: "truck", name: "Truck" },
-  { id: "van", name: "Van" },
-  { id: "sports", name: "Sports Car" },
-  { id: "rv", name: "RV/Motorhome" },
-  { id: "boat", name: "Boat" },
-];
-
-const timeSlots = [
-  "08:00 AM", "09:00 AM", "10:00 AM", "11:00 AM",
-  "12:00 PM", "01:00 PM", "02:00 PM", "03:00 PM",
-  "04:00 PM", "05:00 PM"
-];
 
 // U.S. States data
-const usStates = [
-  { name: "Alabama", abbreviation: "AL" },
-  { name: "Alaska", abbreviation: "AK" },
-  { name: "Arizona", abbreviation: "AZ" },
-  { name: "Arkansas", abbreviation: "AR" },
-  { name: "California", abbreviation: "CA" },
-  { name: "Colorado", abbreviation: "CO" },
-  { name: "Connecticut", abbreviation: "CT" },
-  { name: "Delaware", abbreviation: "DE" },
-  { name: "Florida", abbreviation: "FL" },
-  { name: "Georgia", abbreviation: "GA" },
-  { name: "Hawaii", abbreviation: "HI" },
-  { name: "Idaho", abbreviation: "ID" },
-  { name: "Illinois", abbreviation: "IL" },
-  { name: "Indiana", abbreviation: "IN" },
-  { name: "Iowa", abbreviation: "IA" },
-  { name: "Kansas", abbreviation: "KS" },
-  { name: "Kentucky", abbreviation: "KY" },
-  { name: "Louisiana", abbreviation: "LA" },
-  { name: "Maine", abbreviation: "ME" },
-  { name: "Maryland", abbreviation: "MD" },
-  { name: "Massachusetts", abbreviation: "MA" },
-  { name: "Michigan", abbreviation: "MI" },
-  { name: "Minnesota", abbreviation: "MN" },
-  { name: "Mississippi", abbreviation: "MS" },
-  { name: "Missouri", abbreviation: "MO" },
-  { name: "Montana", abbreviation: "MT" },
-  { name: "Nebraska", abbreviation: "NE" },
-  { name: "Nevada", abbreviation: "NV" },
-  { name: "New Hampshire", abbreviation: "NH" },
-  { name: "New Jersey", abbreviation: "NJ" },
-  { name: "New Mexico", abbreviation: "NM" },
-  { name: "New York", abbreviation: "NY" },
-  { name: "North Carolina", abbreviation: "NC" },
-  { name: "North Dakota", abbreviation: "ND" },
-  { name: "Ohio", abbreviation: "OH" },
-  { name: "Oklahoma", abbreviation: "OK" },
-  { name: "Oregon", abbreviation: "OR" },
-  { name: "Pennsylvania", abbreviation: "PA" },
-  { name: "Rhode Island", abbreviation: "RI" },
-  { name: "South Carolina", abbreviation: "SC" },
-  { name: "South Dakota", abbreviation: "SD" },
-  { name: "Tennessee", abbreviation: "TN" },
-  { name: "Texas", abbreviation: "TX" },
-  { name: "Utah", abbreviation: "UT" },
-  { name: "Vermont", abbreviation: "VT" },
-  { name: "Virginia", abbreviation: "VA" },
-  { name: "Washington", abbreviation: "WA" },
-  { name: "West Virginia", abbreviation: "WV" },
-  { name: "Wisconsin", abbreviation: "WI" },
-  { name: "Wyoming", abbreviation: "WY" }
-];
+
 
 // Common/popular states for faster access
 const popularStates = ["CA", "FL", "IL", "NY", "TX"];
@@ -179,6 +60,14 @@ const Booking = () => {
     timeSlot: "",
     notes: ""
   });
+
+  // Reset addons when selectedServices changes
+  useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      additionalServices: []
+    }));
+  }, [formData.selectedServices]);
 
   // Service selection state
   const [selectedServiceType, setSelectedServiceType] = useState("");
@@ -218,12 +107,24 @@ const Booking = () => {
     });
   };
   
-  const handleSelectChange = (name: string, value: string) => {
-    setFormData({ ...formData, [name]: value });
+const handleSelectChange = (name: string, value: string) => {
+  setFormData(prev => {
     if (name === "serviceType") {
-      setSelectedServiceType(value);
+      return {
+        ...prev,
+        [name]: value,
+        selectedServices: [],     // reset packages
+        additionalServices: []    // reset add-ons
+      };
     }
-  };
+    return { ...prev, [name]: value };
+  });
+
+  if (name === "serviceType") {
+    setSelectedServiceType(value);
+  }
+};
+
   
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -280,7 +181,7 @@ const Booking = () => {
       formspreeData.append("timeSlot", formData.timeSlot);
       
       // Vehicle information
-      formspreeData.append("vehicleType", getVehicleTypeName(formData.vehicleType));
+  formspreeData.append("vehicleType", getVehicleTypeName(formData.vehicleType));
       formspreeData.append("vehicleMake", formData.vehicleMake);
       formspreeData.append("vehicleModel", formData.vehicleModel);
       formspreeData.append("vehicleYear", formData.vehicleYear);
@@ -312,13 +213,13 @@ const Booking = () => {
       // Create properly formatted HTML templates
       
       // HTML template for admin with proper Content-Type
-      const adminHtmlTemplate = getAdminEmailTemplate();
+  const adminHtmlTemplate = getAdminEmailTemplate(formData);
       formspreeData.append("_email.html", adminHtmlTemplate);
       formspreeData.append("_email.from", "Detail Drive Shine <no-reply@detaildriveshine.com>");
       formspreeData.append("_email.to", "mark2359978@gmail.com");
       
       // User autoresponse configuration with HTML content
-      const userHtmlTemplate = getUserEmailTemplate();
+  const userHtmlTemplate = getUserEmailTemplate(formData);
       formspreeData.append("_autoresponse.body", userHtmlTemplate);
       formspreeData.append("_autoresponse.subject", "Your Booking Confirmation - Detail Drive Shine");
       formspreeData.append("_autoresponse.from", "Detail Drive Shine <no-reply@formspree.io>");
@@ -326,13 +227,20 @@ const Booking = () => {
       // Log what we're sending for debugging
       console.log("Sending form data to Formspree");
       
-      const response = await fetch('https://formspree.io/f/mvgalbky', {
+      // const response = await fetch('https://formspree.io/f/mvgalbky', {
+      //   method: 'POST',
+      //   body: formspreeData,
+      //   headers: {
+      //     'Accept': 'application/json'
+      //   }
+      // });
+
+      const response = await fetch('/api/book', {
         method: 'POST',
-        body: formspreeData,
-        headers: {
-          'Accept': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
       });
+      
       
       if (response.ok) {
         // Important: Store the form data for the confirmation modal
@@ -399,213 +307,7 @@ const Booking = () => {
     return serviceType?.packages.find(p => p.id === packageId);
   };
   
-  const getVehicleTypeName = (vehicleTypeId: string) => {
-    const vehicleType = vehicleTypes.find(v => v.id === vehicleTypeId);
-    return vehicleType?.name || vehicleTypeId;
-  };
-
-  // Generate admin email template for detailed booking information
-  const getAdminEmailTemplate = () => {
-    // Format the selected services
-    const selectedPackagesInfo = formData.selectedServices.map(service => {
-      const serviceInfo = serviceTypes.find(s => s.id === service.serviceType);
-      const packageInfo = serviceInfo?.packages.find(p => p.id === service.package);
-      return packageInfo ? `${serviceInfo?.name} - ${packageInfo.name} (${packageInfo.price})` : "";
-    }).join("<br>");
-    
-    // Format add-on services
-    const addonsList = formData.additionalServices.map(serviceId => {
-      const service = additionalServices.find(s => s.id === serviceId);
-      return service ? `${service.name} (${service.price})` : "";
-    }).join("<br>");
-    
-    // Full vehicle details
-    const vehicleDetails = `${formData.vehicleYear} ${formData.vehicleMake} ${formData.vehicleModel} (${formData.vehicleColor})`;
-    const vehicleTypeInfo = getVehicleTypeName(formData.vehicleType);
-    
-    // Format date and time for email
-    const formattedDate = formData.date ? format(formData.date, 'MMMM d, yyyy') : '';
-
-    return `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>New Booking Request</title>
-      </head>
-      <body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 0;">
-        <div style="background-color: #1E40AF; color: white; padding: 15px; text-align: center;">
-          <h2 style="margin: 0;">New Booking Request</h2>
-        </div>
-        
-        <div style="padding: 20px; border: 1px solid #eee;">
-          <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; color: #1E40AF;">Customer Information</h3>
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 8px 0; width: 40%;"><strong>Name:</strong></td>
-              <td style="padding: 8px 0;">${formData.firstName} ${formData.lastName}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0;"><strong>Email:</strong></td>
-              <td style="padding: 8px 0;">${formData.email}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0;"><strong>Phone:</strong></td>
-              <td style="padding: 8px 0;">${formData.phone}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0;"><strong>Address:</strong></td>
-              <td style="padding: 8px 0;">${formData.address}, ${formData.city}, ${formData.state} ${formData.zip}</td>
-            </tr>
-          </table>
-          
-          <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Appointment Details</h3>
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 8px 0; width: 40%;"><strong>Date:</strong></td>
-              <td style="padding: 8px 0;">${formattedDate}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0;"><strong>Time:</strong></td>
-              <td style="padding: 8px 0;">${formData.timeSlot}</td>
-            </tr>
-          </table>
-          
-          <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Vehicle Information</h3>
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 8px 0; width: 40%;"><strong>Vehicle Type:</strong></td>
-              <td style="padding: 8px 0;">${vehicleTypeInfo}</td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0;"><strong>Vehicle:</strong></td>
-              <td style="padding: 8px 0;">${vehicleDetails}</td>
-            </tr>
-            ${formData.vehicleLength ? `
-            <tr>
-              <td style="padding: 8px 0;"><strong>Length:</strong></td>
-              <td style="padding: 8px 0;">${formData.vehicleLength} feet</td>
-            </tr>` : ''}
-          </table>
-          
-          <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Services Booked</h3>
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 8px 0;"><strong>Selected Packages:</strong></td>
-            </tr>
-            <tr>
-              <td style="padding: 8px 0;">${selectedPackagesInfo}</td>
-            </tr>
-          </table>
-          
-          ${addonsList ? `
-          <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Additional Services</h3>
-          <table style="width: 100%; border-collapse: collapse;">
-            <tr>
-              <td style="padding: 8px 0;">${addonsList}</td>
-            </tr>
-          </table>` : ''}
-          
-          ${formData.notes ? `
-          <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Customer Notes</h3>
-          <p style="padding: 8px 0;">${formData.notes}</p>` : ''}
-        </div>
-        
-        <div style="text-align: center; padding: 10px; background-color: #f5f5f5; color: #666; font-size: 12px;">
-          <p>&copy; ${new Date().getFullYear()} Detail Drive Shine. All rights reserved.</p>
-        </div>
-      </body>
-      </html>
-    `;
-  };
-
-  // Generate email template for user confirmation
-  const getUserEmailTemplate = () => {
-    // Get selected package names for email template
-    const selectedPackagesInfo = formData.selectedServices.map(service => {
-      const serviceInfo = serviceTypes.find(s => s.id === service.serviceType);
-      const packageInfo = serviceInfo?.packages.find(p => p.id === service.package);
-      return packageInfo ? `${serviceInfo?.name} - ${packageInfo.name}` : "";
-    }).join("<br>");
-    
-    // Get add-on services for email template
-    const addonsList = formData.additionalServices.map(serviceId => {
-      const service = additionalServices.find(s => s.id === serviceId);
-      return service ? `${service.name} (${service.price})` : "";
-    });
-    
-    // Create add-ons HTML if any add-ons were selected
-    let addonsHtml = '';
-    if (addonsList.length > 0) {
-      addonsHtml = `
-        <tr>
-          <td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Add-ons:</strong></td>
-          <td style="padding: 10px; border-bottom: 1px solid #ddd;">${addonsList.join('<br>')}</td>
-        </tr>
-      `;
-    }
-    
-    // Full vehicle details
-    const vehicleDetails = `${formData.vehicleYear} ${formData.vehicleMake} ${formData.vehicleModel} (${formData.vehicleColor})`;
-    
-    // Format date and time for email
-    const formattedDate = formData.date ? format(formData.date, 'MMMM d, yyyy') : '';
-
-    return `
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Booking Confirmation</title>
-      </head>
-      <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0;">
-        <div style="max-width: 600px; margin: 0 auto; padding: 20px;">
-          <div style="background-color: #1E40AF; color: white; padding: 20px; text-align: center;">
-            <h1 style="margin: 0;">Detail Drive Shine</h1>
-            <p style="margin-top: 10px; margin-bottom: 0;">Booking Confirmation</p>
-          </div>
-          <div style="padding: 20px; background-color: #f9f9f9;">
-            <p>Dear ${formData.firstName},</p>
-            <p>Thank you for booking with Detail Drive Shine. We're excited to provide you with exceptional service.</p>
-            <div style="margin: 20px 0;">
-              <h3 style="color: #1E40AF;">Appointment Details:</h3>
-              <table style="width: 100%; border-collapse: collapse;">
-                <tr>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Date:</strong></td>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd;">${formattedDate}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Time:</strong></td>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd;">${formData.timeSlot}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Service:</strong></td>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd;">${selectedPackagesInfo}</td>
-                </tr>
-                ${addonsHtml}
-                <tr>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Vehicle:</strong></td>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd;">${vehicleDetails}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Location:</strong></td>
-                  <td style="padding: 10px; border-bottom: 1px solid #ddd;">${formData.address}, ${formData.city}, ${formData.state} ${formData.zip}</td>
-                </tr>
-              </table>
-            </div>
-            <p>We look forward to seeing you soon! If you need to make any changes to your appointment, please contact us at <span style="font-weight: bold; color: #1E40AF;">info@detaildriveshine.com</span> or call us at <span style="font-weight: bold; color: #1E40AF;">(555) 123-4567</span>.</p>
-          </div>
-          <div style="text-align: center; padding: 20px; font-size: 12px; color: #666;">
-            <p>Detail Drive Shine - Professional Mobile Detailing Services</p>
-            <p>&copy; ${new Date().getFullYear()} Detail Drive Shine. All rights reserved.</p>
-          </div>
-        </div>
-      </body>
-      </html>
-    `;
-  };
+  // ...existing code...
 
   const getConfirmationDetails = () => {
     // Get selected package info
@@ -750,10 +452,12 @@ const Booking = () => {
                         <label className="block text-sm font-medium text-gray-700">
                           Service Type
                         </label>
-                        <Select 
-                          value={selectedServiceType} 
-                          onValueChange={(value) => setSelectedServiceType(value)}
-                        >
+<Select
+  value={selectedServiceType}
+  onValueChange={(value) => handleSelectChange("serviceType", value)}
+>
+
+
                           <SelectTrigger className="w-full">
                             <SelectValue placeholder="Select a service" />
                           </SelectTrigger>
@@ -1343,7 +1047,7 @@ const Booking = () => {
         details={getConfirmationDetails()}
       />
       
-      <Footer />
+    
     </div>
   );
 };
