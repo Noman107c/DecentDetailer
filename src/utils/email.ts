@@ -102,7 +102,7 @@ export const getAdminEmailTemplate = (formData: any) => {
 				<p style="padding: 8px 0;">${formData.notes}</p>` : ''}
 			</div>
 			<div style="text-align: center; padding: 10px; background-color: #f5f5f5; color: #666; font-size: 12px;">
-				<p>&copy; ${new Date().getFullYear()} Detail Drive Shine. All rights reserved.</p>
+				<p>&copy; ${new Date().getFullYear()} Decent Detailers. All rights reserved.</p>
 			</div>
 		</body>
 		</html>
@@ -145,12 +145,12 @@ export const getUserEmailTemplate = (formData: any) => {
 		<body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333; margin: 0; padding: 0;">
 			<div style="max-width: 600px; margin: 0 auto; padding: 20px;">
 				<div style="background-color: #1E40AF; color: white; padding: 20px; text-align: center;">
-					<h1 style="margin: 0;">Detail Drive Shine</h1>
+					<h1 style="margin: 0;">Decent Detailers</h1>
 					<p style="margin-top: 10px; margin-bottom: 0;">Booking Confirmation</p>
 				</div>
 				<div style="padding: 20px; background-color: #f9f9f9;">
 					<p>Dear ${formData.firstName},</p>
-					<p>Thank you for booking with Detail Drive Shine. We're excited to provide you with exceptional service.</p>
+					<p>Thank you for booking with Decent Detailers. We're excited to provide you with exceptional service.</p>
 					<div style="margin: 20px 0;">
 						<h3 style="color: #1E40AF;">Appointment Details:</h3>
 						<table style="width: 100%; border-collapse: collapse;">
@@ -180,8 +180,8 @@ export const getUserEmailTemplate = (formData: any) => {
 					<p>We look forward to seeing you soon! If you need to make any changes to your appointment, please contact us at <span style="font-weight: bold; color: #1E40AF;">info@detaildriveshine.com</span> or call us at <span style="font-weight: bold; color: #1E40AF;">(555) 123-4567</span>.</p>
 				</div>
 				<div style="text-align: center; padding: 20px; font-size: 12px; color: #666;">
-					<p>Detail Drive Shine - Professional Mobile Detailing Services</p>
-					<p>&copy; ${new Date().getFullYear()} Detail Drive Shine. All rights reserved.</p>
+					<p>Decent Detailers - Professional Mobile Detailing Services</p>
+					<p>&copy; ${new Date().getFullYear()} Decent Detailers. All rights reserved.</p>
 				</div>
 			</div>
 		</body>
