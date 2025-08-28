@@ -9,11 +9,7 @@ export default function CeramicCoatingPage() {
     <div className="min-h-screen">
       <Navbar />
       <CeramicCoating />
-<<<<<<< HEAD
-  
-=======
       <Footer />
->>>>>>> origin/main
     </div>
   );
 } 

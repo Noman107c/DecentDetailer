@@ -6,107 +6,96 @@ export const getVehicleTypeName = (vehicleTypeId: string) => {
 	return vehicleType?.name || vehicleTypeId;
 };
 
+
 export const getAdminEmailTemplate = (formData: any) => {
-	const selectedPackagesInfo = formData.selectedServices.map((service: any) => {
-		const serviceInfo = serviceTypes.find(s => s.id === service.serviceType);
-		const packageInfo = serviceInfo?.packages.find((p: any) => p.id === service.package);
-		return packageInfo ? `${serviceInfo?.name} - ${packageInfo.name} (${packageInfo.price})` : "";
-	}).join("<br>");
+  const selectedPackagesInfo = formData.selectedServices
+    .map((service: any) => {
+      const serviceInfo = serviceTypes.find(
+        (s) => s.id === service.serviceType
+      );
+      const packageInfo = serviceInfo?.packages.find(
+        (p: any) => p.id === service.package
+      );
+      return packageInfo
+        ? `${serviceInfo?.name} - ${packageInfo.name} (${packageInfo.price})`
+        : "";
+    })
+    .join("<br>");
 
-	const addonsList = formData.additionalServices.map((serviceId: string) => {
-		const service = additionalServices.find(s => s.id === serviceId);
-		return service ? `${service.name} (${service.price})` : "";
-	}).join("<br>");
+  const addonsList = formData.additionalServices
+    .map((serviceId: string) => {
+      const service = additionalServices.find((s) => s.id === serviceId);
+      return service ? `${service.name} (${service.price})` : "";
+    })
+    .join("<br>");
 
-	const vehicleDetails = `${formData.vehicleYear} ${formData.vehicleMake} ${formData.vehicleModel} (${formData.vehicleColor})`;
-	const vehicleTypeInfo = getVehicleTypeName(formData.vehicleType);
-	const formattedDate = formData.date ? format(formData.date, 'MMMM d, yyyy') : '';
+  const vehicleDetails = `${formData.vehicleYear} ${formData.vehicleMake} ${formData.vehicleModel} (${formData.vehicleColor})`;
+  const vehicleTypeInfo = getVehicleTypeName(formData.vehicleType);
+  const formattedDate = formData.date
+    ? format(formData.date, "MMMM d, yyyy")
+    : "";
 
-	return `
-		<!DOCTYPE html>
-		<html>
-		<head>
-			<meta charset="utf-8">
-			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>New Booking Request</title>
-		</head>
-		<body style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 0;">
-			<div style="background-color: #1E40AF; color: white; padding: 15px; text-align: center;">
-				<h2 style="margin: 0;">New Booking Request</h2>
-			</div>
-			<div style="padding: 20px; border: 1px solid #eee;">
-				<h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; color: #1E40AF;">Customer Information</h3>
-				<table style="width: 100%; border-collapse: collapse;">
-					<tr>
-						<td style="padding: 8px 0; width: 40%;"><strong>Name:</strong></td>
-						<td style="padding: 8px 0;">${formData.firstName} ${formData.lastName}</td>
-					</tr>
-					<tr>
-						<td style="padding: 8px 0;"><strong>Email:</strong></td>
-						<td style="padding: 8px 0;">${formData.email}</td>
-					</tr>
-					<tr>
-						<td style="padding: 8px 0;"><strong>Phone:</strong></td>
-						<td style="padding: 8px 0;">${formData.phone}</td>
-					</tr>
-					<tr>
-						<td style="padding: 8px 0;"><strong>Address:</strong></td>
-						<td style="padding: 8px 0;">${formData.address}, ${formData.city}, ${formData.state} ${formData.zip}</td>
-					</tr>
-				</table>
-				<h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Appointment Details</h3>
-				<table style="width: 100%; border-collapse: collapse;">
-					<tr>
-						<td style="padding: 8px 0; width: 40%;"><strong>Date:</strong></td>
-						<td style="padding: 8px 0;">${formattedDate}</td>
-					</tr>
-					<tr>
-						<td style="padding: 8px 0;"><strong>Time:</strong></td>
-						<td style="padding: 8px 0;">${formData.timeSlot}</td>
-					</tr>
-				</table>
-				<h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Vehicle Information</h3>
-				<table style="width: 100%; border-collapse: collapse;">
-					<tr>
-						<td style="padding: 8px 0; width: 40%;"><strong>Vehicle Type:</strong></td>
-						<td style="padding: 8px 0;">${vehicleTypeInfo}</td>
-					</tr>
-					<tr>
-						<td style="padding: 8px 0;"><strong>Vehicle:</strong></td>
-						<td style="padding: 8px 0;">${vehicleDetails}</td>
-					</tr>
-					${formData.vehicleLength ? `
-					<tr>
-						<td style="padding: 8px 0;"><strong>Length:</strong></td>
-						<td style="padding: 8px 0;">${formData.vehicleLength} feet</td>
-					</tr>` : ''}
-				</table>
-				<h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Services Booked</h3>
-				<table style="width: 100%; border-collapse: collapse;">
-					<tr>
-						<td style="padding: 8px 0;"><strong>Selected Packages:</strong></td>
-					</tr>
-					<tr>
-						<td style="padding: 8px 0;">${selectedPackagesInfo}</td>
-					</tr>
-				</table>
-				${addonsList ? `
-				<h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Additional Services</h3>
-				<table style="width: 100%; border-collapse: collapse;">
-					<tr>
-						<td style="padding: 8px 0;">${addonsList}</td>
-					</tr>
-				</table>` : ''}
-				${formData.notes ? `
-				<h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Customer Notes</h3>
-				<p style="padding: 8px 0;">${formData.notes}</p>` : ''}
-			</div>
-			<div style="text-align: center; padding: 10px; background-color: #f5f5f5; color: #666; font-size: 12px;">
-				<p>&copy; ${new Date().getFullYear()} Decent Detailers. All rights reserved.</p>
-			</div>
-		</body>
-		</html>
-	`;
+  return `
+    <div style="font-family: Arial, sans-serif; color: #333; line-height: 1.6;">
+      <h2 style="color: #1E40AF;">New Appointment Booking</h2>
+
+      <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; color: #1E40AF;">Customer Information</h3>
+      <p><strong>Name:</strong> ${formData.fullName}</p>
+      <p><strong>Email:</strong> ${formData.email}</p>
+      <p><strong>Phone:</strong> ${formData.phone}</p>
+
+      <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Vehicle Information</h3>
+      <table style="width: 100%; border-collapse: collapse;">
+        <tr>
+          <td style="padding: 8px 0; width: 40%;"><strong>Vehicle Type:</strong></td>
+          <td style="padding: 8px 0;">${vehicleTypeInfo}</td>
+        </tr>
+        <tr>
+          <td style="padding: 8px 0;"><strong>Vehicle:</strong></td>
+          <td style="padding: 8px 0;">${vehicleDetails}</td>
+        </tr>
+        ${
+          formData.vehicleLength
+            ? `
+        <tr>
+          <td style="padding: 8px 0;"><strong>Length:</strong></td>
+          <td style="padding: 8px 0;">${formData.vehicleLength} feet</td>
+        </tr>`
+            : ""
+        }
+      </table>
+
+      <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Services</h3>
+      <p>${selectedPackagesInfo}</p>
+
+      ${
+        addonsList
+          ? `
+      <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Additional Services</h3>
+      <p>${addonsList}</p>`
+          : ""
+      }
+
+      <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Appointment Details</h3>
+      <p><strong>Date:</strong> ${formattedDate}</p>
+      <p><strong>Time:</strong> ${formData.time}</p>
+
+      ${
+        formData.notes
+          ? `
+      <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Customer Notes</h3>
+      <p>${formData.notes}</p>`
+          : ""
+      }
+	        ${
+        formData.notes
+          ? `
+      <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Total Price</h3>
+      <p>${formData.totalPrice}</p>`
+          : ""
+      }
+    </div>
+  `;
 };
 
 export const getUserEmailTemplate = (formData: any) => {
