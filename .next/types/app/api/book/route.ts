@@ -1,4 +1,4 @@
-// File: C:\Github\Globium\decenetDetailers--main\src\app\api\book\route.ts
+// File: C:\Users\Administrator\Downloads\decenetDetailers-\src\app\api\book\route.ts
 import * as entry from '../../../../../src/app/api/book/route.js'
 import type { NextRequest } from 'next/server.js'
 

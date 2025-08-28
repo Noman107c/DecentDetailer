@@ -10,10 +10,6 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-
-// import { Calendar } from "@/components/ui/calendar";
-
-// import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format } from "date-fns";
 import { CalendarIcon, Car, Clock, MapPin, Check,} from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -23,10 +19,6 @@ import { serviceTypes, additionalServices, vehicleTypes, timeSlots, usStates } f
 import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
 import { Calendar } from "@/components/ui/calendar";
 import { getAdminEmailTemplate, getUserEmailTemplate, getVehicleTypeName } from "@/utils/email";
-
-
-// U.S. States data
-
 
 // Common/popular states for faster access
 const popularStates = ["CA", "FL", "IL", "NY", "TX"];
@@ -89,7 +81,6 @@ const Booking = () => {
       }
     });
   };
-  
   const handleRemoveService = (serviceType: string) => {
     setFormData(prev => ({
       ...prev,
@@ -125,12 +116,11 @@ const handleSelectChange = (name: string, value: string) => {
   }
 };
 
-  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
+
   const handleDateChange = (date: Date | undefined) => {
     if (date) {
       setDate(date);
@@ -227,21 +217,12 @@ const handleSelectChange = (name: string, value: string) => {
       // Log what we're sending for debugging
       console.log("Sending form data to Formspree");
       
-      // const response = await fetch('https://formspree.io/f/mvgalbky', {
-      //   method: 'POST',
-      //   body: formspreeData,
-      //   headers: {
-      //     'Accept': 'application/json'
-      //   }
-      // });
 
       const response = await fetch('/api/book', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-      
-      
       if (response.ok) {
         // Important: Store the form data for the confirmation modal
         setShowConfirmation(true);
@@ -824,7 +805,6 @@ const handleSelectChange = (name: string, value: string) => {
                             required
                           />
                         </div>
-                        
                         <div>
                           <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1">
                             State
@@ -1046,8 +1026,6 @@ const handleSelectChange = (name: string, value: string) => {
         description={`Thank you ${formData.firstName}! Your appointment has been scheduled for ${formData.date ? format(formData.date, 'MMMM d, yyyy') : ''} at ${formData.timeSlot}.`}
         details={getConfirmationDetails()}
       />
-      
-    
     </div>
   );
 };
