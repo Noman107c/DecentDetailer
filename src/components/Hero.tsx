@@ -10,11 +10,13 @@ const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
   
   // Images for the carousel
-  const images = [
-    "https://images.unsplash.com/photo-1605557202210-55aef6a7bc97?q=80&w=1920&auto=format&fit=crop", 
-    "https://images.unsplash.com/photo-1635260428481-8236b236ef23?q=80&w=1920&auto=format&fit=crop", 
-    "https://images.unsplash.com/photo-1600979576531-397b9a3fee72?q=80&w=1920&auto=format&fit=crop"  
+   const images = [
+    "https://images.pexels.com/photos/3806273/pexels-photo-3806273.jpeg?auto=compress&w=1200&q=80", // Car wash
+    "https://images.pexels.com/photos/6872961/pexels-photo-6872961.jpeg?auto=compress&w=1200&q=80", // Car interior cleaning (alternate)
+    "https://images.pexels.com/photos/97075/pexels-photo-97075.jpeg?auto=compress&w=1200&q=80"      // Car polish
   ];
+
+
   
   useEffect(() => {
     setIsMounted(true);

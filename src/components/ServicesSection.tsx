@@ -8,9 +8,9 @@ import { MotionButton } from "@/components/ui/motion-button";
 const ServicesSection = () => {
   const services = [
     {
-      title: "Mobile Detailing",
-      description: "Professional detailing brought directly to your location",
-      image: "https://images.unsplash.com/photo-1621251097537-9a118da24552?q=80&w=1000&auto=format&fit=crop",
+      title: "Mobile Detail",
+      description: "Professional detailing brought direct to your location",
+      image: "/exterior_after.png",
       features: [
         "Exterior and interior cleaning",
         "Paint decontamination and correction",
@@ -23,7 +23,7 @@ const ServicesSection = () => {
     {
       title: "Window Tinting",
       description: "Premium window film installation for comfort and style",
-      image: "https://images.unsplash.com/photo-1608510507573-c6007638b17c?q=80&w=1000&auto=format&fit=crop",
+      image: "/window_after.png",
       features: [
         "Heat and UV rejection",
         "Improved privacy",
@@ -36,7 +36,7 @@ const ServicesSection = () => {
     {
       title: "Ceramic Coating",
       description: "Long-lasting paint protection with enhanced gloss",
-      image: "https://images.unsplash.com/photo-1583080995137-8c0a14e60c25?q=80&w=1000&auto=format&fit=crop",
+      image: "/ceramic_after.png",
       features: [
         "9H hardness protection",
         "Hydrophobic properties",

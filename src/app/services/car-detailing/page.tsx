@@ -12,7 +12,7 @@ export default function CarDetailingPage() {
 <<<<<<< HEAD
   
 =======
-      <Footer />
+   <Footer/>
 >>>>>>> origin/main
     </div>
   );

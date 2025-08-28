@@ -1,4 +1,3 @@
-
 import { Wrench, Car, Check, Users } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -33,39 +32,34 @@ const AboutSection = () => {
   };
 
   return (
-    <section className="py-16 bg-white relative overflow-hidden">
-      {/* Background elements */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-decent-lightBlue/5 rounded-full blur-3xl"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-decent-blue/5 rounded-full blur-3xl"></div>
+    <section className="py-20 bg-gradient-to-br from-white via-blue-50 to-decent-lightBlue/10 relative overflow-hidden">
+      {/* Decorative background */}
+      <div className="absolute top-0 right-0 w-80 h-80 bg-decent-lightBlue/10 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 left-0 w-80 h-80 bg-decent-blue/10 rounded-full blur-3xl"></div>
       
       <div className="container mx-auto px-4 relative z-10">
         <motion.div 
-          className="text-center mb-12"
+          className="text-center mb-14"
           variants={fadeInUpVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-4xl font-bold text-decent-blue mb-4">About Decent Detailers</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-decent-blue mb-4 tracking-tight">About Decent Detailers</h2>
           <div className="w-24 h-1 bg-decent-lightBlue mx-auto mb-6 relative">
             <motion.div 
               className="absolute -top-1 left-0 w-6 h-3 bg-decent-blue rounded-full"
-              animate={{ 
-                x: [0, 60, 0],
-              }}
-              transition={{ 
-                duration: 3,
-                repeat: Infinity,
-                ease: "easeInOut" 
-              }}
+              animate={{ x: [0, 60, 0] }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             ></motion.div>
           </div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Bringing showroom-quality results to your doorstep with 9+ years of expertise
+            Bringing showroom-quality results to your doorstep with <span className="text-decent-blue font-semibold">9+ years</span> of expertise.
           </p>
         </motion.div>
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          {/* Left: Text & Features */}
           <motion.div
             variants={staggerChildrenVariants}
             initial="hidden"
@@ -74,32 +68,29 @@ const AboutSection = () => {
           >
             <motion.h3 
               variants={itemVariants}
-              className="text-2xl font-bold text-decent-blue mb-4"
+              className="text-2xl md:text-3xl font-bold text-decent-blue mb-5"
             >
               We Don't Just Clean Cars – We Restore Them to Showroom Perfection
             </motion.h3>
             
             <motion.p 
               variants={itemVariants}
-              className="text-gray-700 mb-6"
+              className="text-gray-700 mb-8 text-base md:text-lg"
             >
-              At Decent Detailers we don't just clean cars – we restore them to showroom perfection. As a fully mobile detailing service, we bring 9+ years of expertise, premium products, and certified techniques directly to your doorstep.
+              At Decent Detailers, we bring <span className="font-semibold text-decent-blue">9+ years</span> of expertise, premium products, and certified techniques directly to your doorstep. Our fully mobile service means you get professional results without the hassle.
             </motion.p>
             
             <motion.div 
               variants={staggerChildrenVariants}
-              className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"
+              className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8"
             >
               <motion.div 
                 variants={itemVariants}
-                whileHover={{ 
-                  y: -5,
-                  transition: { duration: 0.3 }
-                }}
-                className="flex items-start"
+                whileHover={{ y: -5, scale: 1.03, transition: { duration: 0.3 } }}
+                className="flex items-start bg-white rounded-lg shadow p-4 hover:shadow-lg transition"
               >
                 <div className="bg-decent-blue/10 p-3 rounded-full mr-3">
-                  <Car size={24} className="text-decent-blue" />
+                  <Car size={28} className="text-decent-blue" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-decent-blue mb-1">Come to You Service</h4>
@@ -109,14 +100,11 @@ const AboutSection = () => {
               
               <motion.div 
                 variants={itemVariants}
-                whileHover={{ 
-                  y: -5,
-                  transition: { duration: 0.3 }
-                }}
-                className="flex items-start"
+                whileHover={{ y: -5, scale: 1.03, transition: { duration: 0.3 } }}
+                className="flex items-start bg-white rounded-lg shadow p-4 hover:shadow-lg transition"
               >
                 <div className="bg-decent-blue/10 p-3 rounded-full mr-3">
-                  <Check size={24} className="text-decent-blue" />
+                  <Check size={28} className="text-decent-blue" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-decent-blue mb-1">Showroom-Quality Results</h4>
@@ -126,14 +114,11 @@ const AboutSection = () => {
               
               <motion.div 
                 variants={itemVariants}
-                whileHover={{ 
-                  y: -5,
-                  transition: { duration: 0.3 }
-                }}
-                className="flex items-start"
+                whileHover={{ y: -5, scale: 1.03, transition: { duration: 0.3 } }}
+                className="flex items-start bg-white rounded-lg shadow p-4 hover:shadow-lg transition"
               >
                 <div className="bg-decent-blue/10 p-3 rounded-full mr-3">
-                  <Users size={24} className="text-decent-blue" />
+                  <Users size={28} className="text-decent-blue" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-decent-blue mb-1">Trusted Pros</h4>
@@ -143,14 +128,11 @@ const AboutSection = () => {
               
               <motion.div 
                 variants={itemVariants}
-                whileHover={{ 
-                  y: -5,
-                  transition: { duration: 0.3 }
-                }}
-                className="flex items-start"
+                whileHover={{ y: -5, scale: 1.03, transition: { duration: 0.3 } }}
+                className="flex items-start bg-white rounded-lg shadow p-4 hover:shadow-lg transition"
               >
                 <div className="bg-decent-blue/10 p-3 rounded-full mr-3">
-                  <Wrench size={24} className="text-decent-blue" />
+                  <Wrench size={28} className="text-decent-blue" />
                 </div>
                 <div>
                   <h4 className="font-semibold text-decent-blue mb-1">Premium Products</h4>
@@ -161,60 +143,52 @@ const AboutSection = () => {
             
             <motion.p 
               variants={itemVariants}
-              className="text-gray-700 italic border-l-4 border-decent-lightBlue pl-4 py-2 bg-decent-light/30"
+              className="text-gray-700 italic border-l-4 border-decent-lightBlue pl-4 py-2 bg-decent-light/30 text-base"
             >
               "We're obsessed with the details so you can enjoy that new-car feeling – wherever you park."
             </motion.p>
           </motion.div>
           
+          {/* Right: Image & Stats */}
           <motion.div 
-            className="relative"
+            className="relative flex justify-center items-center"
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.3 }}
           >
             <motion.div 
-              className="rounded-lg overflow-hidden shadow-xl"
-              whileHover={{ 
-                scale: 1.02,
-                transition: { duration: 0.3 }
-              }}
+              className="rounded-2xl overflow-hidden shadow-2xl border-4 border-white"
+              whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
             >
               <img 
-                src="https://images.unsplash.com/photo-1601362840469-51e4d58a8da2?q=80&w=1000&auto=format&fit=crop"
+                src="https://images.pexels.com/photos/3806273/pexels-photo-3806273.jpeg?auto=compress&w=600&q=80"
                 alt="Car detailing professional at work" 
-                className="w-full h-full object-cover"
+                className="w-[400px] h-[340px] object-cover"
               />
             </motion.div>
             
             <motion.div 
-              className="absolute -bottom-6 -left-6 bg-decent-blue rounded-lg p-6 shadow-lg w-48 z-10"
+              className="absolute -bottom-8 -left-8 bg-decent-blue rounded-xl p-6 shadow-xl w-48 z-10 border-4 border-white"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.5 }}
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.15)"
-              }}
+              whileHover={{ scale: 1.07 }}
             >
-              <p className="text-white font-bold text-xl">9+ Years</p>
+              <p className="text-white font-bold text-2xl mb-1">9+ Years</p>
               <p className="text-white text-sm">Professional Experience</p>
             </motion.div>
             
             <motion.div 
-              className="absolute -top-6 -right-6 bg-decent-lightBlue rounded-lg p-4 shadow-lg z-10"
+              className="absolute -top-8 -right-8 bg-decent-lightBlue rounded-xl p-4 shadow-xl z-10 border-4 border-white"
               initial={{ opacity: 0, y: -20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.7 }}
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.15)"
-              }}
+              whileHover={{ scale: 1.07 }}
             >
-              <p className="text-white font-semibold">500+</p>
+              <p className="text-white font-semibold text-xl mb-1">500+</p>
               <p className="text-white text-xs">Satisfied Customers</p>
             </motion.div>
           </motion.div>
