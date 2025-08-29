@@ -11,10 +11,10 @@ export const getAdminEmailTemplate = (formData: any) => {
   const selectedPackagesInfo = formData.selectedServices
     .map((service: any) => {
       const serviceInfo = serviceTypes.find(
-        (s) => s.id === service.serviceType
+        (s) => s.name === service.serviceTypes
       );
       const packageInfo = serviceInfo?.packages.find(
-        (p: any) => p.id === service.package
+        (p: any) => p.name === service.package
       );
       return packageInfo
         ? `${serviceInfo?.name} - ${packageInfo.name} ($${packageInfo.price})`
@@ -69,7 +69,7 @@ export const getAdminEmailTemplate = (formData: any) => {
       								<td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Service:</strong></td>
 								<td style="padding: 10px; border-bottom: 1px solid #ddd;">${selectedPackagesInfo}</td>
 							</tr>
-      }
+
       ${
         addonsList
           ? `
@@ -90,8 +90,6 @@ export const getAdminEmailTemplate = (formData: any) => {
           : ""
       }
 
-      <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Total Price</h3>
-      <p><strong>$${formData.totalPrice || 0}</strong></p>
     </div>
   `;
 };
