@@ -10,11 +10,13 @@ const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
   
   // Images for the carousel
-  const images = [
-    "https://images.unsplash.com/photo-1605557202210-55aef6a7bc97?q=80&w=1920&auto=format&fit=crop", 
-    "https://images.unsplash.com/photo-1635260428481-8236b236ef23?q=80&w=1920&auto=format&fit=crop", 
-    "https://images.unsplash.com/photo-1600979576531-397b9a3fee72?q=80&w=1920&auto=format&fit=crop"  
+   const images = [
+    "heroback1.png", // Car wash
+    "heroback2.png", // Car interior cleaning (alternate)
+    "heroback3.png"      // Car polish
   ];
+
+
   
   useEffect(() => {
     setIsMounted(true);

@@ -17,7 +17,7 @@ export const getAdminEmailTemplate = (formData: any) => {
         (p: any) => p.id === service.package
       );
       return packageInfo
-        ? `${serviceInfo?.name} - ${packageInfo.name} (${packageInfo.price})`
+        ? `${serviceInfo?.name} - ${packageInfo.name} ($${packageInfo.price})`
         : "";
     })
     .join("<br>");
@@ -25,7 +25,7 @@ export const getAdminEmailTemplate = (formData: any) => {
   const addonsList = formData.additionalServices
     .map((serviceId: string) => {
       const service = additionalServices.find((s) => s.id === serviceId);
-      return service ? `${service.name} (${service.price})` : "";
+      return service ? `${service.name} ($${service.price})` : "";
     })
     .join("<br>");
 
@@ -40,9 +40,10 @@ export const getAdminEmailTemplate = (formData: any) => {
       <h2 style="color: #1E40AF;">New Appointment Booking</h2>
 
       <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; color: #1E40AF;">Customer Information</h3>
-      <p><strong>Name:</strong> ${formData.fullName}</p>
+      <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
       <p><strong>Email:</strong> ${formData.email}</p>
       <p><strong>Phone:</strong> ${formData.phone}</p>
+      <p><strong>Address:</strong> ${formData.address}, ${formData.city}, ${formData.state} ${formData.zip}</p>
 
       <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Vehicle Information</h3>
       <table style="width: 100%; border-collapse: collapse;">
@@ -64,10 +65,11 @@ export const getAdminEmailTemplate = (formData: any) => {
             : ""
         }
       </table>
-
-      <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Services</h3>
-      <p>${selectedPackagesInfo}</p>
-
+                ${formData.selectedServices.length > 1 ? `<h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Selected Services</h3>` : ""}
+      								<td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Service:</strong></td>
+								<td style="padding: 10px; border-bottom: 1px solid #ddd;">${selectedPackagesInfo}</td>
+							</tr>
+      }
       ${
         addonsList
           ? `
@@ -78,7 +80,7 @@ export const getAdminEmailTemplate = (formData: any) => {
 
       <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Appointment Details</h3>
       <p><strong>Date:</strong> ${formattedDate}</p>
-      <p><strong>Time:</strong> ${formData.time}</p>
+      <p><strong>Time:</strong> ${formData.timeSlot}</p>
 
       ${
         formData.notes
@@ -87,16 +89,13 @@ export const getAdminEmailTemplate = (formData: any) => {
       <p>${formData.notes}</p>`
           : ""
       }
-	        ${
-        formData.notes
-          ? `
+
       <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Total Price</h3>
-      <p>${formData.totalPrice}</p>`
-          : ""
-      }
+      <p><strong>$${formData.totalPrice || 0}</strong></p>
     </div>
   `;
 };
+
 
 export const getUserEmailTemplate = (formData: any) => {
 	const selectedPackagesInfo = formData.selectedServices.map((service: any) => {

@@ -25,8 +25,8 @@ const FeaturedWorks = () => {
       category: "exterior",
       title: "Exterior Detail",
       description: "Full exterior restoration on a black sedan",
-      before: "https://images.unsplash.com/photo-1635260597798-98a63db5d2b0?q=80&w=600&auto=format&fit=crop",
-      after: "https://images.unsplash.com/photo-1550355291-bbee04a92027?q=80&w=600&auto=format&fit=crop",
+      before: "/exterior_before.png",
+      after: "exterior_after.png",
       link: "/services/car-detailing"
     },
     {
@@ -34,8 +34,8 @@ const FeaturedWorks = () => {
       category: "interior",
       title: "Interior Transformation",
       description: "Complete interior cleaning and restoration",
-      before: "https://images.unsplash.com/photo-1597007066704-67bf2068d5b2?q=80&w=600&auto=format&fit=crop",
-      after: "https://images.unsplash.com/photo-1606073716823-e2dde8c3fd16?q=80&w=600&auto=format&fit=crop",
+      before: "interior_before.png",
+      after: "interior_after.png",
           link: "/services/car-detailing"
     },
     {
@@ -43,8 +43,8 @@ const FeaturedWorks = () => {
       category: "ceramic",
       title: "Ceramic Coating",
       description: "Premium ceramic coating application",
-      before: "https://images.unsplash.com/photo-1549399542-7e3f8b79c341?q=80&w=600&auto=format&fit=crop",
-      after: "https://images.unsplash.com/photo-1494976388531-d1058494cdd8?q=80&w=600&auto=format&fit=crop",
+      before: "ceramic_before.png",
+      after: "ceramic_after.png",
          link: "/services/ceramic-coating"
     },
     {
@@ -52,8 +52,8 @@ const FeaturedWorks = () => {
       category: "tint",
       title: "Window Tint",
       description: "Professional window tinting service",
-      before: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=600&auto=format&fit=crop",
-      after: "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?q=80&w=600&auto=format&fit=crop",
+      before: "window_before.png",
+      after: "window_after.png",
          link: "/services/window-tinting"
     }
   ];

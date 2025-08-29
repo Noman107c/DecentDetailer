@@ -1,7 +1,6 @@
-
 import React from "react";
 import { motion } from "framer-motion";
-import { Check, ArrowRight, Shield } from "lucide-react";
+import { Check, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
@@ -17,17 +16,21 @@ const CeramicCoating = () => {
           <div className="absolute inset-0 bg-decent-blue/5 z-0"></div>
           <div className="container mx-auto px-4 py-16 md:py-20 relative z-10">
             <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-              <motion.div 
+              <motion.div
                 className="w-full md:w-1/2"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5 }}
               >
                 <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-decent-blue mb-6">
-                  Professional <span className="text-decent-lightBlue">Ceramic Coating</span> Services
+                  Professional{" "}
+                  <span className="text-decent-lightBlue">Ceramic Coating</span>{" "}
+                  Services
                 </h1>
                 <p className="text-gray-700 text-lg mb-8">
-                  Long-lasting paint protection with enhanced gloss and hydrophobic properties that keep your vehicle looking showroom-new for years.
+                  Long-lasting paint protection with enhanced gloss and
+                  hydrophobic properties that keep your vehicle looking
+                  showroom-new for years.
                 </p>
                 <div className="flex flex-wrap gap-4 mb-8">
                   <div className="flex items-center gap-2 bg-white/80 backdrop-blur-sm py-2 px-4 rounded-full shadow-sm">
@@ -43,27 +46,26 @@ const CeramicCoating = () => {
                     <span className="text-sm font-medium">2-5 Year Protection</span>
                   </div>
                 </div>
-<<<<<<< HEAD
-                <Link href="/booking?service=ceramic-coating">
-=======
-                <Link to="/booking?service=ceramic-coating">
->>>>>>> origin/main
+
+                <Link href="/booking">
                   <Button className="bg-decent-lightBlue hover:bg-decent-blue text-white group">
                     Book Ceramic Coating Now
                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </Button>
                 </Link>
               </motion.div>
-              <motion.div 
+
+              {/* Hero Image */}
+              <motion.div
                 className="w-full md:w-1/2"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
               >
                 <div className="rounded-lg overflow-hidden shadow-xl">
-                  <img 
-                    src="https://images.unsplash.com/photo-1583080995137-8c0a14e60c25?q=80&w=1200&auto=format&fit=crop" 
-                    alt="Professional ceramic coating service" 
+                  <img
+                    src="ceramic_after.png"
+                    alt="Professional ceramic coating service"
                     className="w-full h-auto"
                   />
                 </div>
@@ -75,46 +77,38 @@ const CeramicCoating = () => {
         {/* Packages Section */}
         <div className="container mx-auto px-4 py-16">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold text-decent-blue mb-4">Ceramic Coating Packages</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-decent-blue mb-4">
+              Ceramic Coating Packages
+            </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Choose from our ceramic coating packages with varying durability and protection levels
+              Choose from our ceramic coating packages with varying durability
+              and protection levels
             </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Basic Package */}
-            <motion.div 
+            <motion.div
               className="bg-white rounded-xl shadow-lg p-6 border border-decent-light/30"
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.1 }}
             >
-              <h3 className="text-xl font-bold text-decent-blue mb-2">Basic Ceramic</h3>
-              <p className="text-3xl font-bold text-decent-lightBlue mb-4">$599</p>
+              <h3 className="text-xl font-bold text-decent-blue mb-2">
+                Basic Ceramic
+              </h3>
+              <p className="text-3xl font-bold text-decent-lightBlue mb-4">
+                $599
+              </p>
               <div className="space-y-3 mb-6">
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">1-year protection</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">Basic paint correction</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">Hydrophobic properties</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">Enhanced gloss finish</span>
-                </div>
+                <Feature text="1-year protection" />
+                <Feature text="Basic paint correction" />
+                <Feature text="Hydrophobic properties" />
+                <Feature text="Enhanced gloss finish" />
               </div>
-<<<<<<< HEAD
-              <Link href="/booking?service=basic-ceramic" className="block">
-=======
-              <Link to="/booking?service=basic-ceramic" className="block">
->>>>>>> origin/main
+
+              <Link href="/booking">
                 <Button className="w-full bg-decent-blue hover:bg-decent-lightBlue text-white">
                   Select Package
                 </Button>
@@ -122,7 +116,7 @@ const CeramicCoating = () => {
             </motion.div>
 
             {/* Premium Package */}
-            <motion.div 
+            <motion.div
               className="bg-white rounded-xl shadow-lg p-6 border-2 border-decent-lightBlue relative"
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
               initial={{ opacity: 0, y: 20 }}
@@ -132,35 +126,21 @@ const CeramicCoating = () => {
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-decent-lightBlue text-white text-sm font-bold py-1 px-4 rounded-full">
                 MOST POPULAR
               </div>
-              <h3 className="text-xl font-bold text-decent-blue mb-2">Premium Ceramic</h3>
-              <p className="text-3xl font-bold text-decent-lightBlue mb-4">$999</p>
+              <h3 className="text-xl font-bold text-decent-blue mb-2">
+                Premium Ceramic
+              </h3>
+              <p className="text-3xl font-bold text-decent-lightBlue mb-4">
+                $999
+              </p>
               <div className="space-y-3 mb-6">
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">3-year protection</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">2-step paint correction</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">Superior hydrophobic effect</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">Superior gloss finish</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">Chemical resistance</span>
-                </div>
+                <Feature text="3-year protection" />
+                <Feature text="2-step paint correction" />
+                <Feature text="Superior hydrophobic effect" />
+                <Feature text="Superior gloss finish" />
+                <Feature text="Chemical resistance" />
               </div>
-<<<<<<< HEAD
-              <Link href="/booking?service=premium-ceramic" className="block">
-=======
-              <Link to="/booking?service=premium-ceramic" className="block">
->>>>>>> origin/main
+
+              <Link href="/booking">
                 <Button className="w-full bg-decent-lightBlue hover:bg-decent-blue text-white">
                   Select Package
                 </Button>
@@ -168,46 +148,29 @@ const CeramicCoating = () => {
             </motion.div>
 
             {/* Luxury Package */}
-            <motion.div 
+            <motion.div
               className="bg-white rounded-xl shadow-lg p-6 border border-decent-light/30"
               whileHover={{ y: -5, transition: { duration: 0.2 } }}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.3 }}
             >
-              <h3 className="text-xl font-bold text-decent-blue mb-2">Luxury Ceramic</h3>
-              <p className="text-3xl font-bold text-decent-lightBlue mb-4">$1499</p>
+              <h3 className="text-xl font-bold text-decent-blue mb-2">
+                Luxury Ceramic
+              </h3>
+              <p className="text-3xl font-bold text-decent-lightBlue mb-4">
+                $1499
+              </p>
               <div className="space-y-3 mb-6">
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">5-year protection</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">3-step paint correction</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">Ultimate hydrophobic effect</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">Maximum gloss finish</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">Enhanced scratch resistance</span>
-                </div>
-                <div className="flex items-start gap-2">
-                  <Check size={18} className="text-decent-lightBlue mt-1" />
-                  <span className="text-gray-700">UV protection</span>
-                </div>
+                <Feature text="5-year protection" />
+                <Feature text="3-step paint correction" />
+                <Feature text="Ultimate hydrophobic effect" />
+                <Feature text="Maximum gloss finish" />
+                <Feature text="Enhanced scratch resistance" />
+                <Feature text="UV protection" />
               </div>
-<<<<<<< HEAD
-              <Link href="/booking?service=luxury-ceramic" className="block">
-=======
-              <Link to="/booking?service=luxury-ceramic" className="block">
->>>>>>> origin/main
+
+              <Link href="/booking">
                 <Button className="w-full bg-decent-blue hover:bg-decent-lightBlue text-white">
                   Select Package
                 </Button>
@@ -219,74 +182,41 @@ const CeramicCoating = () => {
         {/* How It Works */}
         <div className="container mx-auto px-4 py-16">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-decent-blue mb-4">How Ceramic Coating Works</h2>
+            <h2 className="text-3xl font-bold text-decent-blue mb-4">
+              How Ceramic Coating Works
+            </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Our professional ceramic coating process ensures the best results for your vehicle
+              Our professional ceramic coating process ensures the best results
+              for your vehicle
             </p>
           </div>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="bg-decent-blue/10 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-decent-blue">1</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Wash & Decontamination</h3>
-              <p className="text-gray-600 text-sm">
-                Thorough cleaning to remove all contaminants from the paint surface
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-decent-blue/10 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-decent-blue">2</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Paint Correction</h3>
-              <p className="text-gray-600 text-sm">
-                Remove swirls, scratches and imperfections for a perfect surface
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-decent-blue/10 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-decent-blue">3</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Coating Application</h3>
-              <p className="text-gray-600 text-sm">
-                Expert application of ceramic coating in a controlled environment
-              </p>
-            </div>
-            <div className="text-center">
-              <div className="bg-decent-blue/10 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-4">
-                <span className="text-2xl font-bold text-decent-blue">4</span>
-              </div>
-              <h3 className="text-lg font-semibold mb-2">Curing & Final Inspection</h3>
-              <p className="text-gray-600 text-sm">
-                Allow proper curing time and perform quality control inspection
-              </p>
-            </div>
+            <Step number="1" title="Wash & Decontamination" text="Thorough cleaning to remove all contaminants from the paint surface" />
+            <Step number="2" title="Paint Correction" text="Remove swirls, scratches and imperfections for a perfect surface" />
+            <Step number="3" title="Coating Application" text="Expert application of ceramic coating in a controlled environment" />
+            <Step number="4" title="Curing & Final Inspection" text="Allow proper curing time and perform quality control inspection" />
           </div>
         </div>
 
         {/* CTA Section */}
         <div className="container mx-auto px-4 py-12">
           <div className="bg-decent-blue rounded-2xl p-8 md:p-12 text-white text-center">
-            <h2 className="text-2xl md:text-3xl font-bold mb-4">Protect Your Vehicle's Paint Today</h2>
+            <h2 className="text-2xl md:text-3xl font-bold mb-4">
+              Protect Your Vehicle's Paint Today
+            </h2>
             <p className="mb-6 max-w-lg mx-auto">
-              Schedule your ceramic coating appointment and give your vehicle the ultimate protection with a stunning glossy finish.
+              Schedule your ceramic coating appointment and give your vehicle
+              the ultimate protection with a stunning glossy finish.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-<<<<<<< HEAD
               <Link href="/booking">
-=======
-              <Link to="/booking">
->>>>>>> origin/main
                 <Button className="bg-white text-decent-blue hover:bg-decent-lightBlue hover:text-white">
                   Book Now
                 </Button>
               </Link>
-<<<<<<< HEAD
+
               <Link href="/contact">
-=======
-              <Link to="/contact">
->>>>>>> origin/main
                 <Button variant="outline" className="border-white text-white hover:bg-white hover:text-decent-blue">
                   Contact Us
                 </Button>
@@ -295,13 +225,28 @@ const CeramicCoating = () => {
           </div>
         </div>
       </div>
-<<<<<<< HEAD
-    
-=======
       <Footer />
->>>>>>> origin/main
     </>
   );
 };
+
+// Reusable Feature Item
+const Feature = ({ text }: { text: string }) => (
+  <div className="flex items-start gap-2">
+    <Check size={18} className="text-decent-lightBlue mt-1" />
+    <span className="text-gray-700">{text}</span>
+  </div>
+);
+
+// Reusable Step Item
+const Step = ({ number, title, text }: { number: string; title: string; text: string }) => (
+  <div className="text-center">
+    <div className="bg-decent-blue/10 rounded-full h-16 w-16 flex items-center justify-center mx-auto mb-4">
+      <span className="text-2xl font-bold text-decent-blue">{number}</span>
+    </div>
+    <h3 className="text-lg font-semibold mb-2">{title}</h3>
+    <p className="text-gray-600 text-sm">{text}</p>
+  </div>
+);
 
 export default CeramicCoating;

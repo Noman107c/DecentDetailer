@@ -58,7 +58,7 @@ const CarDetailing = () => {
               >
                 <div className="rounded-lg overflow-hidden shadow-xl">
                   <img 
-                    src="https://images.unsplash.com/photo-1600979576531-397b9a3fee72?q=80&w=1200&auto=format&fit=crop" 
+                    src="interior_after.png" 
                     alt="Professional car detailing service" 
                     className="w-full h-auto"
                   />
