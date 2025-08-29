@@ -8,7 +8,7 @@ export const getVehicleTypeName = (vehicleTypeId: string) => {
 
 
 export const getAdminEmailTemplate = (formData: any) => {
-  const selectedPackageNames = formData.selectedServices
+  const selectedPackagesInfo = formData.selectedServices
     .map((service: any) => {
       const serviceInfo = serviceTypes.find(
         (s) => s.name === service.serviceTypes
@@ -67,7 +67,7 @@ export const getAdminEmailTemplate = (formData: any) => {
       </table>
                 ${formData.selectedServices.length > 1 ? `<h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Selected Services</h3>` : ""}
       								<td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Service:</strong></td>
-								<td style="padding: 10px; border-bottom: 1px solid #ddd;">${selectedPackageNames}</td>
+								<td style="padding: 10px; border-bottom: 1px solid #ddd;">${selectedPackagesInfo}</td>
 							</tr>
 
       ${
@@ -96,7 +96,7 @@ export const getAdminEmailTemplate = (formData: any) => {
 
 
 export const getUserEmailTemplate = (formData: any) => {
-	const selectedPackageNames = formData.selectedServices.map((service: any) => {
+	const selectedPackagesInfo = formData.selectedServices.map((service: any) => {
 		const serviceInfo = serviceTypes.find(s => s.id === service.serviceType);
 		const packageInfo = serviceInfo?.packages.find((p: any) => p.id === service.package);
 		return packageInfo ? `${serviceInfo?.name} - ${packageInfo.name}` : "";
@@ -150,7 +150,7 @@ export const getUserEmailTemplate = (formData: any) => {
 							</tr>
 							<tr>
 								<td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Service:</strong></td>
-								<td style="padding: 10px; border-bottom: 1px solid #ddd;">${selectedPackageNames}</td>
+								<td style="padding: 10px; border-bottom: 1px solid #ddd;">${selectedPackagesInfo}</td>
 							</tr>
 							${addonsHtml}
 							<tr>
