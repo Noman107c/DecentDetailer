@@ -64,7 +64,7 @@ const CeramicCoating = () => {
               >
                 <div className="rounded-lg overflow-hidden shadow-xl">
                   <img
-                    src="ceramic_after.png"
+                    src="/window_after.png"
                     alt="Professional ceramic coating service"
                     className="w-full h-auto"
                   />

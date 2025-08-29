@@ -1,46 +1,23 @@
-
 import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { motion } from "framer-motion";
-import { 
-  Table, 
-  TableBody, 
-  TableCell, 
-  TableHead, 
-  TableHeader, 
-  TableRow 
-} from "@/components/ui/table";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Check, Car, Truck, Zap } from "lucide-react";
+import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Navbar from "@/components/Navbar";
-
 
 const Services = () => {
   const [activeTab, setActiveTab] = useState("car-detailing");
 
   const fadeIn = {
     hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: { duration: 0.5 }
-    }
-  };
-
-  const staggerContainer = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
   const serviceCategories = {
     "car-detailing": {
       title: "Car Detailing Packages",
-      description: "Professional detailing services for your car, customized to your needs.",
+      description:
+        "Professional detailing services for your car, customized to your needs.",
       image: "slider_1.png",
       sections: [
         {
@@ -53,8 +30,8 @@ const Services = () => {
                 "Exterior hand wash",
                 "Tire dressing",
                 "Basic rim cleaning",
-                "Window cleaning"
-              ]
+                "Window cleaning",
+              ],
             },
             {
               name: "Premium Exterior Package",
@@ -64,10 +41,10 @@ const Services = () => {
                 "Clay bar treatment",
                 "Hand wax application",
                 "Wheel well cleaning",
-                "Exterior plastic trim treatment"
-              ]
-            }
-          ]
+                "Exterior plastic trim treatment",
+              ],
+            },
+          ],
         },
         {
           title: "Interior Packages",
@@ -79,8 +56,8 @@ const Services = () => {
                 "Complete vacuuming",
                 "Dashboard/console wipe down",
                 "Door panel cleaning",
-                "Basic mat cleaning"
-              ]
+                "Basic mat cleaning",
+              ],
             },
             {
               name: "Premium Interior Package",
@@ -90,37 +67,17 @@ const Services = () => {
                 "Leather/vinyl conditioning",
                 "Carpet shampooing",
                 "Headliner cleaning",
-                "Interior odor elimination"
-              ]
-            }
-          ]
-        },
-        {
-          title: "Full Detail Packages",
-          packages: [
-            {
-              name: "Full Basic Detail",
-              price: "$220",
-              features: [
-                "Basic Exterior + Basic Interior"
-              ]
+                "Interior odor elimination",
+              ],
             },
-            {
-              name: "Full Premium Detail",
-              price: "$299",
-              features: [
-                "Premium Exterior + Premium Interior",
-                "Engine bay cleaning",
-                "Interior UV protectant"
-              ]
-            }
-          ]
-        }
-      ]
+          ],
+        },
+      ],
     },
     "rv-boat": {
       title: "RV & Boat Packages",
-      description: "Specialized cleaning and detailing for larger vehicles, priced per foot.",
+      description:
+        "Specialized cleaning and detailing for larger vehicles, priced per foot.",
       image: "boat.png",
       sections: [
         {
@@ -133,8 +90,8 @@ const Services = () => {
                 "Full exterior wash",
                 "Wax application",
                 "Hull/deck cleaning",
-                "Awning cleaning"
-              ]
+                "Awning cleaning",
+              ],
             },
             {
               name: "Interior Only",
@@ -143,8 +100,8 @@ const Services = () => {
                 "Complete vacuuming",
                 "Surface cleaning",
                 "Cabinet wiping",
-                "Floor cleaning"
-              ]
+                "Floor cleaning",
+              ],
             },
             {
               name: "Complete Detail",
@@ -153,17 +110,19 @@ const Services = () => {
                 "Full exterior and interior",
                 "Upholstery cleaning",
                 "Mold/mildew treatment",
-                "Protective coatings"
-              ]
-            }
-          ]
-        }
-      ]
+                "Protective coatings",
+              ],
+            },
+          ],
+        },
+      ],
     },
     "specialty-vehicles": {
       title: "Specialty Vehicle Packages",
-      description: "Tailored detailing services for motorcycles, ATVs, and other specialty vehicles.",
-      image: "https://images.unsplash.com/photo-1558981852-426c6c22a060?q=80&w=1000&auto=format&fit=crop",
+      description:
+        "Tailored detailing services for motorcycles, ATVs, and other specialty vehicles.",
+      image:
+        "https://images.unsplash.com/photo-1558981852-426c6c22a060?q=80&w=1000&auto=format&fit=crop",
       sections: [
         {
           title: "Specialty Vehicle Packages",
@@ -175,8 +134,8 @@ const Services = () => {
                 "Full exterior wash",
                 "Underbody cleaning",
                 "Plastic trim restoration",
-                "Interior wipe down"
-              ]
+                "Interior wipe down",
+              ],
             },
             {
               name: "Motorcycle Package",
@@ -185,26 +144,17 @@ const Services = () => {
                 "Complete bike wash",
                 "Chrome polishing",
                 "Leather conditioning",
-                "Chain cleaning"
-              ]
+                "Chain cleaning",
+              ],
             },
-            {
-              name: "Boat/Yacht Starter",
-              price: "$400+",
-              features: [
-                "Hull cleaning",
-                "Deck scrubbing",
-                "Interior surfaces",
-                "Window cleaning"
-              ]
-            }
-          ]
-        }
-      ]
+          ],
+        },
+      ],
     },
     "add-ons": {
       title: "Add-On Services",
-      description: "Enhance your detailing package with these premium add-on services.",
+      description:
+        "Enhance your detailing package with these premium add-on services.",
       image: "adds_on.jpg",
       sections: [
         {
@@ -213,158 +163,125 @@ const Services = () => {
             {
               name: "Headlight restoration",
               price: "$99",
-              features: ["Professional restoration to remove yellowing and haziness"]
+              features: [
+                "Professional restoration to remove yellowing and haziness",
+              ],
             },
             {
               name: "Full window tinting",
               price: "$249",
-              features: ["High-quality film with UV protection and heat rejection"]
+              features: [
+                "High-quality film with UV protection and heat rejection",
+              ],
             },
-            {
-              name: "Paint correction",
-              price: "$150+",
-              features: ["Remove swirls, scratches and imperfections"]
-            },
-            {
-              name: "Ceramic coating",
-              price: "$300+",
-              features: ["Long-lasting protection with enhanced gloss"]
-            }
-          ]
+          ],
         },
-        {
-          title: "Interior Upgrades",
-          packages: [
-            {
-              name: "Pet hair removal",
-              price: "$40",
-              features: ["Thorough removal of embedded pet hair"]
-            },
-            {
-              name: "Stain removal",
-              price: "$60",
-              features: ["Professional treatment for tough stains"]
-            },
-            {
-              name: "Full shampoo",
-              price: "$75",
-              features: ["Deep cleaning of all fabric surfaces"]
-            },
-            {
-              name: "Odor bomb treatment",
-              price: "$50",
-              features: ["Eliminates stubborn odors at the source"]
-            }
-          ]
-        },
-        {
-          title: "Protection Packages",
-          packages: [
-            {
-              name: "6-month wax",
-              price: "$65",
-              features: ["Premium carnauba wax for lasting shine"]
-            },
-            {
-              name: "1-year ceramic",
-              price: "$150",
-              features: ["Entry-level ceramic protection"]
-            },
-            {
-              name: "Fabric protection",
-              price: "$80",
-              features: ["Repels liquids and prevents staining"]
-            },
-            {
-              name: "Leather conditioning",
-              price: "$60",
-              features: ["Nourishes and protects leather surfaces"]
-            }
-          ]
-        }
-      ]
-    }
+      ],
+    },
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-gray-50">
       <Navbar />
-      
-      <div className="bg-gradient-to-b from-decent-light to-white pt-32 pb-16">
+
+      <div className="pt-28 pb-16">
         <div className="container mx-auto px-4">
-          <motion.div 
-            className="text-center mb-12"
+          {/* Heading */}
+          <motion.div
+            className="text-center mb-16"
             initial="hidden"
             animate="visible"
             variants={fadeIn}
           >
-            <h1 className="text-4xl md:text-5xl font-bold text-decent-blue mb-4">Our Services</h1>
-            <div className="w-24 h-1 bg-decent-lightBlue mx-auto mb-6"></div>
+            <h1 className="text-4xl md:text-5xl font-bold text-decent-blue mb-4">
+              Our Services
+            </h1>
+            <div className="w-24 h-1 bg-decent-lightBlue mx-auto mb-6 rounded-full"></div>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-              We offer a variety of professional detailing services to keep your vehicle looking its absolute best
+              We offer professional detailing services to keep your vehicle in
+              showroom condition.
             </p>
-            <div className="mt-4 text-sm text-decent-blue px-4 py-2 bg-decent-light/50 rounded-full inline-flex items-center">
-              <span className="mr-2">✨</span>
-              All packages include complimentary air freshener, touch-up kit, 24-hour rain guarantee, and quality inspection
-            </div>
           </motion.div>
-          
-          <Tabs defaultValue="car-detailing" value={activeTab} onValueChange={setActiveTab} className="w-full">
-            <TabsList className="grid w-full grid-cols-4 mb-10 rounded-lg">
-              <TabsTrigger value="car-detailing" className="text-xs md:text-sm py-3 flex items-center justify-center gap-1">
-                <Car size={16} />
-                <span className="hidden sm:inline">Car Detailing</span>
+
+          {/* Tabs */}
+          <Tabs
+            defaultValue="car-detailing"
+            value={activeTab}
+            onValueChange={setActiveTab}
+            className="w-full"
+          >
+            <TabsList className="grid w-full grid-cols-4 mb-12 rounded-xl bg-white shadow-md p-2">
+              <TabsTrigger
+                value="car-detailing"
+                className="text-sm py-3 rounded-lg data-[state=active]:bg-decent-blue data-[state=active]:text-white"
+              >
+                <Car size={16} className="mr-2" />
+                Car Detailing
               </TabsTrigger>
-              <TabsTrigger value="rv-boat" className="text-xs md:text-sm py-3 flex items-center justify-center gap-1">
-                <Truck size={16} />
-                <span className="hidden sm:inline">RV & Boat</span>
+              <TabsTrigger
+                value="rv-boat"
+                className="text-sm py-3 rounded-lg data-[state=active]:bg-decent-blue data-[state=active]:text-white"
+              >
+                <Truck size={16} className="mr-2" />
+                RV & Boat
               </TabsTrigger>
-              <TabsTrigger value="specialty-vehicles" className="text-xs md:text-sm py-3 flex items-center justify-center gap-1">
-                <span>🏍️</span>
-                <span className="hidden sm:inline">Specialty</span>
+              <TabsTrigger
+                value="specialty-vehicles"
+                className="text-sm py-3 rounded-lg data-[state=active]:bg-decent-blue data-[state=active]:text-white"
+              >
+                🏍️ Specialty
               </TabsTrigger>
-              <TabsTrigger value="add-ons" className="text-xs md:text-sm py-3 flex items-center justify-center gap-1">
-                <Zap size={16} />
-                <span className="hidden sm:inline">Add-Ons</span>
+              <TabsTrigger
+                value="add-ons"
+                className="text-sm py-3 rounded-lg data-[state=active]:bg-decent-blue data-[state=active]:text-white"
+              >
+                <Zap size={16} className="mr-2" />
+                Add-Ons
               </TabsTrigger>
             </TabsList>
-            
+
+            {/* Tab Content */}
             {Object.entries(serviceCategories).map(([key, category]) => (
               <TabsContent key={key} value={key}>
                 <motion.div
                   initial="hidden"
                   animate="visible"
-                  variants={staggerContainer}
+                  variants={fadeIn}
                   className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start"
                 >
-                  <motion.div variants={fadeIn}>
-                    <h2 className="text-3xl font-bold text-decent-blue mb-4">{category.title}</h2>
+                  {/* Left Side Content */}
+                  <div>
+                    <h2 className="text-2xl font-bold text-decent-blue mb-3">
+                      {category.title}
+                    </h2>
                     <p className="text-gray-700 mb-8">{category.description}</p>
-                    
-                    {category.sections.map((section, sectionIndex) => (
-                      <div key={sectionIndex} className="mb-10">
-                        <h3 className="text-xl font-semibold text-decent-blue mb-5 border-b border-decent-light pb-2">
+
+                    {category.sections.map((section, idx) => (
+                      <div key={idx} className="mb-10">
+                        <h3 className="text-lg font-semibold text-decent-blue mb-4 border-b pb-2">
                           {section.title}
                         </h3>
-                        
+
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                          {section.packages.map((pkg, packageIndex) => (
-                            <motion.div 
-                              key={packageIndex} 
-                              className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-shadow border border-decent-light/30"
-                              whileHover={{ y: -5 }}
-                              variants={fadeIn}
+                          {section.packages.map((pkg, index) => (
+                            <motion.div
+                              key={index}
+                              whileHover={{ y: -4 }}
+                              className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow p-6 border border-gray-100"
                             >
-                              <div className="flex justify-between items-center mb-4">
-                                <h3 className="text-lg font-bold text-decent-blue">{pkg.name}</h3>
-                                <span className="text-xl font-bold text-decent-lightBlue">{pkg.price}</span>
+                              <div className="flex justify-between items-center mb-3">
+                                <h3 className="text-lg font-bold text-decent-blue">
+                                  {pkg.name}
+                                </h3>
+                                <span className="text-lg font-semibold text-decent-lightBlue">
+                                  {pkg.price}
+                                </span>
                               </div>
-                              
-                              <ul className="space-y-2">
-                                {pkg.features.map((feature, fIndex) => (
-                                  <li key={fIndex} className="flex items-start">
-                                    <Check className="h-4 w-4 text-decent-blue mr-2 mt-1 flex-shrink-0" />
-                                    <span className="text-gray-700 text-sm">{feature}</span>
+                              <ul className="space-y-2 text-sm text-gray-600">
+                                {pkg.features.map((feature, i) => (
+                                  <li key={i} className="flex items-start">
+                                    <Check className="h-4 w-4 text-decent-blue mr-2 mt-1" />
+                                    {feature}
                                   </li>
                                 ))}
                               </ul>
@@ -373,52 +290,50 @@ const Services = () => {
                         </div>
                       </div>
                     ))}
-                  </motion.div>
-                  
-                  <motion.div 
-                    variants={fadeIn}
-                    className="sticky top-20 hidden lg:block"
-                  >
-                    <div className="rounded-xl overflow-hidden shadow-xl">
-                      <AspectRatio ratio={3/4}>
-                        <img 
+                  </div>
+
+                  {/* Right Side Image */}
+                  <div className="sticky top-24 hidden lg:block">
+                    <div className="rounded-xl overflow-hidden shadow-lg">
+                      <AspectRatio ratio={16 / 10}>
+                        <img
                           src={category.image}
-                          alt={category.title} 
+                          alt={category.title}
                           className="w-full h-full object-cover"
                         />
                       </AspectRatio>
                     </div>
-                    <div className="absolute -bottom-6 -right-6 bg-decent-blue text-white p-6 rounded-lg shadow-lg">
-                      <p className="font-bold text-xl">Professional Service</p>
-                      <p className="text-sm">Satisfaction guaranteed</p>
-                    </div>
-                  </motion.div>
+                  </div>
                 </motion.div>
               </TabsContent>
             ))}
           </Tabs>
 
-          <motion.div 
-            className="mt-16 bg-decent-light/30 p-8 rounded-xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
+          {/* Bottom CTA */}
+          <motion.div
+            className="mt-20 bg-white shadow-md border border-gray-100 p-10 rounded-2xl text-center"
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
           >
-            <h2 className="text-2xl font-bold text-decent-blue mb-4">Customized Packages Available</h2>
-            <p className="text-gray-700 mb-4">
-              Don't see exactly what you're looking for? We can create a custom detailing package 
-              tailored to your specific vehicle and needs. Contact us today to discuss your requirements.
+            <h2 className="text-2xl font-bold text-decent-blue mb-4">
+              Customized Packages Available
+            </h2>
+            <p className="text-gray-600 max-w-xl mx-auto mb-8">
+              Don't see exactly what you're looking for? We can create a custom
+              detailing package tailored to your vehicle. Contact us today to
+              discuss your requirements.
             </p>
-            <div className="flex flex-wrap gap-4 mt-8">
-              <a 
-                href="/booking" 
-                className="bg-decent-blue hover:bg-decent-lightBlue text-white px-6 py-3 rounded-lg transition-colors"
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href="/booking"
+                className="bg-decent-blue hover:bg-decent-lightBlue text-white px-6 py-3 rounded-lg transition"
               >
                 Book Now
               </a>
-              <a 
-                href="/contact" 
-                className="bg-white border border-decent-blue text-decent-blue hover:bg-decent-light px-6 py-3 rounded-lg transition-colors"
+              <a
+                href="/contact"
+                className="bg-white border border-decent-blue text-decent-blue hover:bg-decent-light px-6 py-3 rounded-lg transition"
               >
                 Contact Us
               </a>
@@ -426,8 +341,6 @@ const Services = () => {
           </motion.div>
         </div>
       </div>
-      
-  
     </div>
   );
 };

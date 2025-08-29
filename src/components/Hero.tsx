@@ -11,8 +11,8 @@ const Hero = () => {
   
   // Images for the carousel
    const images = [
-    "heroback1.png", // Car wash
-    "heroback2.png", // Car interior cleaning (alternate)
+    "heroback2.png", // Car wash
+    "about_us.jpg", // Car interior cleaning (alternate)
     "heroback3.png"      // Car polish
   ];
 
@@ -63,7 +63,7 @@ const Hero = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-4">
-              Mobile Detailing <br />
+              Decent Detailers <br />
               <span className="text-decent-lightBlue">Wherever You Park</span>
             </h1>
             

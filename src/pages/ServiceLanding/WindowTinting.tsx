@@ -58,7 +58,7 @@ const WindowTinting = () => {
               >
                 <div className="rounded-lg overflow-hidden shadow-xl">
                   <img 
-                    src="" 
+                    src="/ceramic_after.png" 
                     alt="Professional window tinting service" 
                     className="w-full h-auto"
                   />
