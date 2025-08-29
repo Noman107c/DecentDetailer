@@ -45,7 +45,9 @@ const AboutSection = () => {
           whileInView="visible"
           viewport={{ once: true }}
         >
-          <h2 className="text-4xl md:text-5xl font-extrabold text-decent-blue mb-4 tracking-tight">About Decent Detailers</h2>
+          <h2 className="text-4xl md:text-5xl font-extrabold text-decent-blue mb-4 tracking-tight">
+            About Decent Detailers
+          </h2>
           <div className="w-24 h-1 bg-decent-lightBlue mx-auto mb-6 relative">
             <motion.div 
               className="absolute -top-1 left-0 w-6 h-3 bg-decent-blue rounded-full"
@@ -54,7 +56,8 @@ const AboutSection = () => {
             ></motion.div>
           </div>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Bringing showroom-quality results to your doorstep with <span className="text-decent-blue font-semibold">9+ years</span> of expertise.
+            Bringing showroom-quality results to your doorstep with{" "}
+            <span className="text-decent-blue font-semibold">years of expertise</span>.
           </p>
         </motion.div>
         
@@ -77,7 +80,9 @@ const AboutSection = () => {
               variants={itemVariants}
               className="text-gray-700 mb-8 text-base md:text-lg"
             >
-              At Decent Detailers, we bring <span className="font-semibold text-decent-blue">9+ years</span> of expertise, premium products, and certified techniques directly to your doorstep. Our fully mobile service means you get professional results without the hassle.
+              At Decent Detailers, we bring expertise, premium products, and certified techniques 
+              directly to your doorstep. Our fully mobile service means you get professional 
+              results without the hassle.
             </motion.p>
             
             <motion.div 
@@ -122,7 +127,7 @@ const AboutSection = () => {
                 </div>
                 <div>
                   <h4 className="font-semibold text-decent-blue mb-1">Trusted Pros</h4>
-                  <p className="text-sm text-gray-600">Certified in paint correction and protective coatings</p>
+                  <p className="text-sm text-gray-600">Certified in paint correction and coatings</p>
                 </div>
               </motion.div>
               
@@ -149,7 +154,7 @@ const AboutSection = () => {
             </motion.p>
           </motion.div>
           
-          {/* Right: Image & Stats */}
+          {/* Right: Image Only */}
           <motion.div 
             className="relative flex justify-center items-center"
             initial={{ opacity: 0, x: 20 }}
@@ -162,34 +167,10 @@ const AboutSection = () => {
               whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
             >
               <img 
-                src="https://images.pexels.com/photos/3806273/pexels-photo-3806273.jpeg?auto=compress&w=600&q=80"
+                src="slider_1.png"
                 alt="Car detailing professional at work" 
                 className="w-[400px] h-[340px] object-cover"
               />
-            </motion.div>
-            
-            <motion.div 
-              className="absolute -bottom-8 -left-8 bg-decent-blue rounded-xl p-6 shadow-xl w-48 z-10 border-4 border-white"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.5 }}
-              whileHover={{ scale: 1.07 }}
-            >
-              <p className="text-white font-bold text-2xl mb-1">9+ Years</p>
-              <p className="text-white text-sm">Professional Experience</p>
-            </motion.div>
-            
-            <motion.div 
-              className="absolute -top-8 -right-8 bg-decent-lightBlue rounded-xl p-4 shadow-xl z-10 border-4 border-white"
-              initial={{ opacity: 0, y: -20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.7 }}
-              whileHover={{ scale: 1.07 }}
-            >
-              <p className="text-white font-semibold text-xl mb-1">500+</p>
-              <p className="text-white text-xs">Satisfied Customers</p>
             </motion.div>
           </motion.div>
         </div>

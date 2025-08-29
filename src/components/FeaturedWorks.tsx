@@ -43,8 +43,8 @@ const FeaturedWorks = () => {
       category: "ceramic",
       title: "Ceramic Coating",
       description: "Premium ceramic coating application",
-      before: "ceramic_before.png",
-      after: "ceramic_after.png",
+      before: "window_before.png",
+      after: "window_after.png",
          link: "/services/ceramic-coating"
     },
     {
@@ -52,8 +52,8 @@ const FeaturedWorks = () => {
       category: "tint",
       title: "Window Tint",
       description: "Professional window tinting service",
-      before: "window_before.png",
-      after: "window_after.png",
+      before: "ceramic_before.png",
+      after: "ceramic_after.png",
          link: "/services/window-tinting"
     }
   ];

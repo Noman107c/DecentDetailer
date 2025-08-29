@@ -23,7 +23,7 @@ const ServicesSection = () => {
     {
       title: "Window Tinting",
       description: "Premium window film installation for comfort and style",
-      image: "window_after.png",
+      image: "ceramic_after.png",
       features: [
         "Heat and UV rejection",
         "Improved privacy",
@@ -36,7 +36,7 @@ const ServicesSection = () => {
     {
       title: "Ceramic Coating",
       description: "Long-lasting paint protection with enhanced gloss",
-      image: "ceramic_after.png",
+      image: "window_after.png",
       features: [
         "9H hardness protection",
         "Hydrophobic properties",

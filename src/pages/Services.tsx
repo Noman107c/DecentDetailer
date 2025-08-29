@@ -13,7 +13,7 @@ import {
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Check, Car, Truck, Zap } from "lucide-react";
 import Navbar from "@/components/Navbar";
-import Footer from "@/components/Footer";
+
 
 const Services = () => {
   const [activeTab, setActiveTab] = useState("car-detailing");
@@ -41,7 +41,7 @@ const Services = () => {
     "car-detailing": {
       title: "Car Detailing Packages",
       description: "Professional detailing services for your car, customized to your needs.",
-      image: "https://images.unsplash.com/photo-1621251097537-9a118da24552?q=80&w=1000&auto=format&fit=crop",
+      image: "slider_1.png",
       sections: [
         {
           title: "Exterior Packages",
@@ -205,7 +205,7 @@ const Services = () => {
     "add-ons": {
       title: "Add-On Services",
       description: "Enhance your detailing package with these premium add-on services.",
-      image: "https://images.unsplash.com/photo-1583080995137-8c0a14e60c25?q=80&w=1000&auto=format&fit=crop",
+      image: "adds_on.jpg",
       sections: [
         {
           title: "Exterior Enhancements",
