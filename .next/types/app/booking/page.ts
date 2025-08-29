@@ -1,4 +1,4 @@
-// File: C:\Users\anass\OneDrive\Documents\work\Decent-Detailers-next\src\app\booking\page.tsx
+// File: C:\Users\Administrator\Downloads\decenetDetailers-\src\app\booking\page.tsx
 import * as entry from '../../../../src/app/booking/page.js'
 import type { ResolvingMetadata, ResolvingViewport } from 'next/dist/lib/metadata/types/metadata-interface.js'
 

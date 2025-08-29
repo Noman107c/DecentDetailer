@@ -13,10 +13,9 @@ const HeroBackground = ({ currentSlide, setCurrentSlide }: HeroBackgroundProps) 
   
   // Fixed image URLs with high-quality, verified images
   const images = [
-    "https://images.unsplash.com/photo-1605557202210-55aef6a7bc97?q=80&w=1920&auto=format&fit=crop", 
-    "https://images.unsplash.com/photo-1655370164710-30356ab45cdb?q=80&w=1920&auto=format&fit=crop", 
-    "https://images.unsplash.com/photo-1635260428481-8236b236ef23?q=80&w=1920&auto=format&fit=crop", 
-    "https://images.unsplash.com/photo-1600979576531-397b9a3fee72?q=80&w=1920&auto=format&fit=crop"  
+    "heroback1.png", 
+    "heroback2.png", 
+    "heroback3.png", 
   ];
   
   useEffect(() => {

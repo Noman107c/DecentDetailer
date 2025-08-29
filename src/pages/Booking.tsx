@@ -10,10 +10,6 @@ import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrig
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 
-
-// import { Calendar } from "@/components/ui/calendar";
-
-// import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { format } from "date-fns";
 import { CalendarIcon, Car, Clock, MapPin, Check,} from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -23,10 +19,6 @@ import { serviceTypes, additionalServices, vehicleTypes, timeSlots, usStates } f
 import { Popover, PopoverContent, PopoverTrigger } from "@radix-ui/react-popover";
 import { Calendar } from "@/components/ui/calendar";
 import { getAdminEmailTemplate, getUserEmailTemplate, getVehicleTypeName } from "@/utils/email";
-
-
-// U.S. States data
-
 
 // Common/popular states for faster access
 const popularStates = ["CA", "FL", "IL", "NY", "TX"];
@@ -89,7 +81,6 @@ const Booking = () => {
       }
     });
   };
-  
   const handleRemoveService = (serviceType: string) => {
     setFormData(prev => ({
       ...prev,
@@ -125,12 +116,11 @@ const handleSelectChange = (name: string, value: string) => {
   }
 };
 
-  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
-  
+
   const handleDateChange = (date: Date | undefined) => {
     if (date) {
       setDate(date);
@@ -191,57 +181,72 @@ const handleSelectChange = (name: string, value: string) => {
       }
       
       // Selected services
-      formData.selectedServices.forEach((service, index) => {
+      formData.selectedServices.forEach((service, id) => {
         const serviceType = serviceTypes.find(s => s.id === service.serviceType);
         const packageInfo = serviceType?.packages.find(p => p.id === service.package);
-        formspreeData.append(`service_${index + 1}_type`, serviceType?.name || '');
-        formspreeData.append(`service_${index + 1}_package`, packageInfo?.name || '');
-        formspreeData.append(`service_${index + 1}_price`, packageInfo?.price || '');
+        formspreeData.append(`service_${id + 1}_type`, serviceType?.name || '');
+        formspreeData.append(`service_${id + 1}_package`, packageInfo?.name || '');
+        formspreeData.append(`service_${id + 1}_price1`, packageInfo?.price || '');
       });
       
       // Additional services
-      formData.additionalServices.forEach((serviceId, index) => {
+      formData.additionalServices.forEach((serviceId, id) => {
         const service = additionalServices.find(s => s.id === serviceId);
-        formspreeData.append(`addon_${index + 1}`, `${service?.name} (${service?.price})`);
+        formspreeData.append(`addon_${id + 1}`, `${service?.name} (${service?.price})`);
       });
       
       // Additional notes
       if (formData.notes) {
         formspreeData.append("notes", formData.notes);
       }
-      
+      // Initialize total price
+let totalPrice = 0;
+
+// Selected services
+formData.selectedServices.forEach((service, index) => {
+  const serviceType = serviceTypes.find(s => s.name === service.serviceType);
+  const packageInfo = serviceType?.packages.find(p => p.id === service.package);
+
+  // Ensure numeric value
+  const price = packageInfo?.price ? Number(packageInfo.price) : 0;
+  totalPrice += price;
+
+  formspreeData.append(`service_${index + 1}_type`, serviceType?.name || '');
+  formspreeData.append(`service_${index + 1}_package`, packageInfo?.name || '');
+  formspreeData.append(`service_${index + 1}_price1`, price.toString());
+});
+
+// Additional services
+formData.additionalServices.forEach((serviceId, index) => {
+  const service = additionalServices.find(s => s.id === serviceId);
+
+  const price = service?.price ? Number(service.price) : 0;
+  totalPrice += price;
+
+  formspreeData.append(`addon_${index + 1}`, `${service?.name} (${price})`);
+});
+
+// Append total price
+formspreeData.append("total_price", totalPrice.toString());
+
       // Create properly formatted HTML templates
-      
       // HTML template for admin with proper Content-Type
   const adminHtmlTemplate = getAdminEmailTemplate(formData);
       formspreeData.append("_email.html", adminHtmlTemplate);
       formspreeData.append("_email.from", "Detail Drive Shine <no-reply@detaildriveshine.com>");
       formspreeData.append("_email.to", "mark2359978@gmail.com");
-      
       // User autoresponse configuration with HTML content
   const userHtmlTemplate = getUserEmailTemplate(formData);
       formspreeData.append("_autoresponse.body", userHtmlTemplate);
       formspreeData.append("_autoresponse.subject", "Your Booking Confirmation - Detail Drive Shine");
       formspreeData.append("_autoresponse.from", "Detail Drive Shine <no-reply@formspree.io>");
-      
       // Log what we're sending for debugging
       console.log("Sending form data to Formspree");
-      
-      // const response = await fetch('https://formspree.io/f/mvgalbky', {
-      //   method: 'POST',
-      //   body: formspreeData,
-      //   headers: {
-      //     'Accept': 'application/json'
-      //   }
-      // });
-
       const response = await fetch('/api/book', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
-      
-      
       if (response.ok) {
         // Important: Store the form data for the confirmation modal
         setShowConfirmation(true);
@@ -268,7 +273,6 @@ const handleSelectChange = (name: string, value: string) => {
       setIsSubmitting(false);
     }
   };
-
   const handleCloseConfirmation = () => {
     setShowConfirmation(false);
     
@@ -297,18 +301,13 @@ const handleSelectChange = (name: string, value: string) => {
     setDate(undefined);
     setStep(1);
   };
-
   const getServiceTypeDetails = (serviceTypeId: string) => {
     return serviceTypes.find(s => s.id === serviceTypeId);
   };
-
   const getPackageDetails = (serviceTypeId: string, packageId: string) => {
     const serviceType = serviceTypes.find(s => s.id === serviceTypeId);
     return serviceType?.packages.find(p => p.id === packageId);
   };
-  
-  // ...existing code...
-
   const getConfirmationDetails = () => {
     // Get selected package info
     const selectedPackageNames = formData.selectedServices.map(service => {
@@ -316,41 +315,36 @@ const handleSelectChange = (name: string, value: string) => {
       const packageInfo = serviceInfo?.packages.find(p => p.id === service.package);
       return packageInfo ? `${serviceInfo?.name} - ${packageInfo.name} (${packageInfo.price})` : "";
     });
-
     // Get add-on services
     const additionalServiceNames = formData.additionalServices.map(serviceId => {
       const service = additionalServices.find(s => s.id === serviceId);
       return service ? `${service.name} (${service.price})` : "";
     });
-
     // Vehicle information
     const vehicleDetails = formData.vehicleMake && formData.vehicleModel ? 
       `${formData.vehicleYear} ${formData.vehicleMake} ${formData.vehicleModel} (${formData.vehicleColor})` : 
       "";
-
     // Date and time
     const formattedDate = formData.date ? format(formData.date, 'MMMM d, yyyy') : '';
     const appointmentDateTime = formattedDate && formData.timeSlot ? 
       `${formattedDate} at ${formData.timeSlot}` : "";
-
     return (
       <div className="text-sm">
         <p className="font-medium mb-2">Services Selected:</p>
         <ul className="mb-3 space-y-1">
-          {selectedPackageNames.map((name, index) => (
-            <li key={index} className="flex items-start">
+          {selectedPackageNames.map((name, id) => (
+            <li key={id} className="flex items-start">
               <Check size={16} className="mr-1 text-green-500 mt-0.5 flex-shrink-0" />
               <span>{name}</span>
             </li>
           ))}
         </ul>
-        
         {additionalServiceNames.length > 0 && (
           <>
             <p className="font-medium mb-2">Add-on Services:</p>
             <ul className="mb-3 space-y-1">
-              {additionalServiceNames.map((name, index) => (
-                <li key={index} className="flex items-start">
+              {additionalServiceNames.map((name, id) => (
+                <li key={id} className="flex items-start">
                   <Check size={16} className="mr-1 text-green-500 mt-0.5 flex-shrink-0" />
                   <span>{name}</span>
                 </li>
@@ -358,10 +352,8 @@ const handleSelectChange = (name: string, value: string) => {
             </ul>
           </>
         )}
-        
         <p className="font-medium mb-2">Vehicle Information:</p>
         <p className="mb-3">{vehicleDetails}</p>
-        
         <p className="font-medium mb-2">Appointment:</p>
         <p>{appointmentDateTime}</p>
         {formData.address && (
@@ -370,7 +362,6 @@ const handleSelectChange = (name: string, value: string) => {
       </div>
     );
   };
-
   const fadeIn = {
     hidden: { opacity: 0, y: 10 },
     visible: { 
@@ -379,11 +370,9 @@ const handleSelectChange = (name: string, value: string) => {
       transition: { duration: 0.5 }
     }
   };
-
   return (
     <div className="min-h-screen">
       <Navbar />
-      
       <div className="bg-gradient-to-b from-decent-light to-white pt-32 pb-16">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
@@ -393,7 +382,6 @@ const handleSelectChange = (name: string, value: string) => {
               Schedule your mobile detailing appointment in just a few simple steps
             </p>
           </div>
-          
           <div className="max-w-4xl mx-auto">
             <div className="flex items-center justify-center mb-8 relative">
               <div className="absolute w-4/5 h-[2px] bg-gray-200">
@@ -402,7 +390,6 @@ const handleSelectChange = (name: string, value: string) => {
                   style={{ width: `${(step - 1) * 50}%` }}
                 ></div>
               </div>
-              
               <div className="flex justify-between w-4/5 relative">
                 <div className={`flex flex-col items-center`}>
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center z-10 
@@ -413,7 +400,6 @@ const handleSelectChange = (name: string, value: string) => {
                     Service
                   </span>
                 </div>
-                
                 <div className={`flex flex-col items-center`}>
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center z-10
                     ${step >= 2 ? "bg-decent-blue text-white" : "bg-gray-200 text-gray-500"}`}>
@@ -423,7 +409,6 @@ const handleSelectChange = (name: string, value: string) => {
                     Vehicle
                   </span>
                 </div>
-                
                 <div className={`flex flex-col items-center`}>
                   <div className={`w-10 h-10 rounded-full flex items-center justify-center z-10
                     ${step >= 3 ? "bg-decent-blue text-white" : "bg-gray-200 text-gray-500"}`}>
@@ -435,7 +420,6 @@ const handleSelectChange = (name: string, value: string) => {
                 </div>
               </div>
             </div>
-            
             <Card className="border-0 shadow-lg rounded-xl overflow-hidden">
               <CardContent className="p-8">
                 <form onSubmit={handleSubmit} action="https://formspree.io/f/mvgalbky" method="POST">
@@ -447,17 +431,13 @@ const handleSelectChange = (name: string, value: string) => {
                       className="space-y-6"
                     >
                       <h2 className="text-2xl font-bold text-decent-blue mb-6">Select Your Service</h2>
-                      
                       <div className="space-y-4">
                         <label className="block text-sm font-medium text-gray-700">
                           Service Type
                         </label>
 <Select
   value={selectedServiceType}
-  onValueChange={(value) => handleSelectChange("serviceType", value)}
->
-
-
+  onValueChange={(value) => handleSelectChange("serviceType", value)}>
                           <SelectTrigger className="w-full">
                             <SelectValue placeholder="Select a service" />
                           </SelectTrigger>
@@ -470,19 +450,16 @@ const handleSelectChange = (name: string, value: string) => {
                           </SelectContent>
                         </Select>
                       </div>
-                      
                       {selectedServiceType && (
                         <div className="mt-6 animate-fade-in">
                           <h3 className="text-lg font-medium text-decent-blue mb-4">
                             {getServiceTypeDetails(selectedServiceType)?.name} Packages
                           </h3>
-                          
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {getServiceTypeDetails(selectedServiceType)?.packages.map((pkg) => {
                               const isSelected = formData.selectedServices.some(
                                 s => s.serviceType === selectedServiceType && s.package === pkg.id
                               );
-                              
                               return (
                                 <div 
                                   key={pkg.id}
@@ -510,17 +487,15 @@ const handleSelectChange = (name: string, value: string) => {
                           </div>
                         </div>
                       )}
-                      
                       {formData.selectedServices.length > 0 && (
                         <div className="bg-blue-50 p-4 rounded-lg">
                           <h3 className="text-lg font-medium text-decent-blue mb-3">Your Selected Services</h3>
                           <div className="space-y-2">
-                            {formData.selectedServices.map((service, index) => {
+                            {formData.selectedServices.map((service, id) => {
                               const serviceInfo = getServiceTypeDetails(service.serviceType);
                               const packageInfo = getPackageDetails(service.serviceType, service.package);
-                              
                               return (
-                                <div key={index} className="flex justify-between items-center bg-white p-3 rounded border">
+                                <div key={id} className="flex justify-between items-center bg-white p-3 rounded border">
                                   <div>
                                     <p className="font-medium">{serviceInfo?.name}</p>
                                     <p className="text-sm text-gray-600">{packageInfo?.name} - {packageInfo?.price}</p>
@@ -539,11 +514,9 @@ const handleSelectChange = (name: string, value: string) => {
                           </div>
                         </div>
                       )}
-                      
                       {formData.selectedServices.length > 0 && (
                         <div>
                           <h3 className="text-lg font-medium text-decent-blue mb-4">Add-on Services (Optional)</h3>
-                          
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             {additionalServices.map((service) => (
                               <div key={service.id} className="flex items-start space-x-2">
@@ -565,7 +538,6 @@ const handleSelectChange = (name: string, value: string) => {
                           </div>
                         </div>
                       )}
-                    
                       <div className="pt-4 flex justify-end">
                         <Button 
                           type="button" 
@@ -578,7 +550,6 @@ const handleSelectChange = (name: string, value: string) => {
                       </div>
                     </motion.div>
                   )}
-                  
                   {step === 2 && (
                     <motion.div 
                       initial="hidden"
@@ -587,7 +558,7 @@ const handleSelectChange = (name: string, value: string) => {
                       className="space-y-6"
                     >
                       <h2 className="text-2xl font-bold text-decent-blue mb-6">Vehicle Information</h2>
-                      
+
                       <div className="space-y-4">
                         <label className="block text-sm font-medium text-gray-700">
                           Vehicle Type
@@ -606,7 +577,6 @@ const handleSelectChange = (name: string, value: string) => {
                           </SelectContent>
                         </Select>
                       </div>
-                      
                       {isSpecialtyVehicle && (
                         <div className="animate-fade-in">
                           <label htmlFor="vehicleLength" className="block text-sm font-medium text-gray-700 mb-1">
@@ -628,7 +598,6 @@ const handleSelectChange = (name: string, value: string) => {
                           </p>
                         </div>
                       )}
-                      
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                           <label htmlFor="vehicleMake" className="block text-sm font-medium text-gray-700 mb-1">
@@ -645,7 +614,6 @@ const handleSelectChange = (name: string, value: string) => {
                             required
                           />
                         </div>
-                        
                         <div>
                           <label htmlFor="vehicleModel" className="block text-sm font-medium text-gray-700 mb-1">
                             Model
@@ -662,7 +630,6 @@ const handleSelectChange = (name: string, value: string) => {
                           />
                         </div>
                       </div>
-                      
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                           <label htmlFor="vehicleYear" className="block text-sm font-medium text-gray-700 mb-1">
@@ -677,7 +644,6 @@ const handleSelectChange = (name: string, value: string) => {
                             required
                           />
                         </div>
-                        
                         <div>
                           <label htmlFor="vehicleColor" className="block text-sm font-medium text-gray-700 mb-1">
                             Color
@@ -692,7 +658,6 @@ const handleSelectChange = (name: string, value: string) => {
                           />
                         </div>
                       </div>
-                      
                       <div>
                         <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-1">
                           Special Instructions (Optional)
@@ -706,7 +671,6 @@ const handleSelectChange = (name: string, value: string) => {
                           rows={3}
                         />
                       </div>
-                      
                       <div className="pt-4 flex justify-between">
                         <Button 
                           type="button" 
@@ -729,7 +693,6 @@ const handleSelectChange = (name: string, value: string) => {
                       </div>
                     </motion.div>
                   )}
-                  
                   {step === 3 && (
                     <motion.div 
                       initial="hidden"
@@ -738,7 +701,7 @@ const handleSelectChange = (name: string, value: string) => {
                       className="space-y-6"
                     >
                       <h2 className="text-2xl font-bold text-decent-blue mb-6">Contact & Appointment Details</h2>
-                      
+
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                           <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
@@ -752,7 +715,6 @@ const handleSelectChange = (name: string, value: string) => {
                             required
                           />
                         </div>
-                        
                         <div>
                           <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
                             Last Name
@@ -766,7 +728,6 @@ const handleSelectChange = (name: string, value: string) => {
                           />
                         </div>
                       </div>
-                      
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                           <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
@@ -781,7 +742,6 @@ const handleSelectChange = (name: string, value: string) => {
                             required
                           />
                         </div>
-                        
                         <div>
                           <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
                             Phone
@@ -796,7 +756,6 @@ const handleSelectChange = (name: string, value: string) => {
                           />
                         </div>
                       </div>
-                      
                       <div>
                         <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
                           Address (Where we'll perform the service)
@@ -810,7 +769,6 @@ const handleSelectChange = (name: string, value: string) => {
                           required
                         />
                       </div>
-                      
                       <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                         <div>
                           <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
@@ -824,7 +782,6 @@ const handleSelectChange = (name: string, value: string) => {
                             required
                           />
                         </div>
-                        
                         <div>
                           <label htmlFor="state" className="block text-sm font-medium text-gray-700 mb-1">
                             State
@@ -865,7 +822,6 @@ const handleSelectChange = (name: string, value: string) => {
                             </SelectContent>
                           </Select>
                         </div>
-                        
                         <div className="col-span-2 md:col-span-1">
                           <label htmlFor="zip" className="block text-sm font-medium text-gray-700 mb-1">
                             ZIP Code
@@ -879,7 +835,6 @@ const handleSelectChange = (name: string, value: string) => {
                           />
                         </div>
                       </div>
-                      
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -942,19 +897,19 @@ const handleSelectChange = (name: string, value: string) => {
                       </div>
 
                       {/* Hidden form fields */}
-                      {formData.selectedServices.map((service, index) => {
+                      {formData.selectedServices.map((service, id) => {
                         const serviceType = serviceTypes.find(s => s.id === service.serviceType);
                         const packageInfo = serviceType?.packages.find(p => p.id === service.package);
                         return (
-                          <div key={`hidden-service-${index}`} style={{ display: 'none' }}>
+                          <div key={`hidden-service-${id}`} style={{ display: 'none' }}>
                             <input 
                               type="hidden" 
-                              name={`service_${index + 1}_type`}
+                              name={`service_${id + 1}_type`}
                               value={serviceType?.name || ''}
                             />
                             <input 
                               type="hidden" 
-                              name={`service_${index + 1}_package`}
+                              name={`service_${id + 1}_package`}
                               value={packageInfo?.name || ''}
                             />
                           </div>
@@ -971,24 +926,23 @@ const handleSelectChange = (name: string, value: string) => {
                       <div className="bg-gray-50 p-4 rounded-lg">
                         <h3 className="text-lg font-medium text-decent-blue mb-3">Order Summary</h3>
                         <div className="space-y-2">
-                          {formData.selectedServices.map((service, index) => {
+                          {formData.selectedServices.map((service, id) => {
                             const serviceInfo = getServiceTypeDetails(service.serviceType);
                             const packageInfo = getPackageDetails(service.serviceType, service.package);
                             return (
-                              <div key={index} className="flex justify-between">
+                              <div key={id} className="flex justify-between">
                                 <span>{serviceInfo?.name} - {packageInfo?.name}</span>
                                 <span className="font-medium">{packageInfo?.price}</span>
                               </div>
                             );
                           })}
-                          
                           {formData.additionalServices.length > 0 && (
                             <>
                               <div className="border-t border-gray-200 my-2"></div>
-                              {formData.additionalServices.map((serviceId, index) => {
+                              {formData.additionalServices.map((serviceId, id) => {
                                 const service = additionalServices.find(s => s.id === serviceId);
                                 return (
-                                  <div key={index} className="flex justify-between">
+                                  <div key={id} className="flex justify-between">
                                     <span>{service?.name}</span>
                                     <span className="font-medium">{service?.price}</span>
                                   </div>
@@ -998,14 +952,12 @@ const handleSelectChange = (name: string, value: string) => {
                           )}
                         </div>
                       </div>
-                      
                       <div className="pt-4 flex justify-between">
                         <Button 
                           type="button" 
                           variant="outline" 
                           onClick={prevStep}
-                          className="border-decent-blue text-decent-blue"
-                        >
+                          className="border-decent-blue text-decent-blue">
                           Back
                         </Button>
                         <Button 
@@ -1013,8 +965,7 @@ const handleSelectChange = (name: string, value: string) => {
                           disabled={isSubmitting || !formData.firstName || !formData.lastName || !formData.email || 
                                   !formData.phone || !formData.address || !formData.city || !formData.state || 
                                   !formData.zip || !formData.date || !formData.timeSlot}
-                          className="bg-decent-blue hover:bg-decent-lightBlue text-white"
-                        >
+                          className="bg-decent-blue hover:bg-decent-lightBlue text-white">
                           {isSubmitting ? "Submitting..." : "Complete Booking"}
                         </Button>
                       </div>
@@ -1023,7 +974,6 @@ const handleSelectChange = (name: string, value: string) => {
                 </form>
               </CardContent>
             </Card>
-            
             <div className="mt-8 bg-decent-blue/10 rounded-xl p-6 flex items-start">
               <div className="mr-3 text-decent-blue">
                 <MapPin size={24} />
@@ -1038,7 +988,6 @@ const handleSelectChange = (name: string, value: string) => {
           </div>
         </div>
       </div>
-      
       <ConfirmationModal
         open={showConfirmation}
         onClose={handleCloseConfirmation}
@@ -1046,10 +995,7 @@ const handleSelectChange = (name: string, value: string) => {
         description={`Thank you ${formData.firstName}! Your appointment has been scheduled for ${formData.date ? format(formData.date, 'MMMM d, yyyy') : ''} at ${formData.timeSlot}.`}
         details={getConfirmationDetails()}
       />
-      
-    
     </div>
   );
 };
-
 export default Booking;

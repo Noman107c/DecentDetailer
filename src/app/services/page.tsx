@@ -9,11 +9,7 @@ export default function ServicesPage() {
     <div className="min-h-screen">
       <Navbar />
       <Services />
-<<<<<<< HEAD
- 
-=======
       <Footer />
->>>>>>> origin/main
     </div>
   );
-} 
+}

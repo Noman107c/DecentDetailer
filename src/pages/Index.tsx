@@ -10,6 +10,19 @@ import FeaturedWorks from "@/components/FeaturedWorks";
 import ProcessSection from "@/components/ProcessSection";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { Variants } from "framer-motion";
+
+const sectionVariants: Variants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.8,
+      ease: [0.22, 1, 0.36, 1] as [number, number, number, number] // 👈 fix
+    }
+  }
+};
 
 const Index = () => {
   // Scroll to top when component mounts

@@ -121,7 +121,7 @@ const Services = () => {
     "rv-boat": {
       title: "RV & Boat Packages",
       description: "Specialized cleaning and detailing for larger vehicles, priced per foot.",
-      image: "https://images.unsplash.com/photo-1564376130023-5360fbb7c91b?q=80&w=1000&auto=format&fit=crop",
+      image: "boat.png",
       sections: [
         {
           title: "RV/Boat Packages (Price per foot)",
