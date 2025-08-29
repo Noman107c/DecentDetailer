@@ -8,13 +8,13 @@ export const getVehicleTypeName = (vehicleTypeId: string) => {
 
 
 export const getAdminEmailTemplate = (formData: any) => {
-  const selectedPackagesInfo = formData.selectedServices
+  const selectedPackageNames = formData.selectedServices
     .map((service: any) => {
       const serviceInfo = serviceTypes.find(
-        (s) => s.id === service.serviceType
+        (s) => s.name === service.serviceTypes
       );
       const packageInfo = serviceInfo?.packages.find(
-        (p: any) => p.id === service.package
+        (p: any) => p.name === service.package
       );
       return packageInfo
         ? `${serviceInfo?.name} - ${packageInfo.name} ($${packageInfo.price})`
@@ -67,9 +67,9 @@ export const getAdminEmailTemplate = (formData: any) => {
       </table>
                 ${formData.selectedServices.length > 1 ? `<h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Selected Services</h3>` : ""}
       								<td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Service:</strong></td>
-								<td style="padding: 10px; border-bottom: 1px solid #ddd;">${selectedPackagesInfo}</td>
+								<td style="padding: 10px; border-bottom: 1px solid #ddd;">${selectedPackageNames}</td>
 							</tr>
-      }
+
       ${
         addonsList
           ? `
@@ -90,15 +90,13 @@ export const getAdminEmailTemplate = (formData: any) => {
           : ""
       }
 
-      <h3 style="border-bottom: 1px solid #eee; padding-bottom: 10px; margin-top: 20px; color: #1E40AF;">Total Price</h3>
-      <p><strong>$${formData.totalPrice || 0}</strong></p>
     </div>
   `;
 };
 
 
 export const getUserEmailTemplate = (formData: any) => {
-	const selectedPackagesInfo = formData.selectedServices.map((service: any) => {
+	const selectedPackageNames = formData.selectedServices.map((service: any) => {
 		const serviceInfo = serviceTypes.find(s => s.id === service.serviceType);
 		const packageInfo = serviceInfo?.packages.find((p: any) => p.id === service.package);
 		return packageInfo ? `${serviceInfo?.name} - ${packageInfo.name}` : "";
@@ -152,7 +150,7 @@ export const getUserEmailTemplate = (formData: any) => {
 							</tr>
 							<tr>
 								<td style="padding: 10px; border-bottom: 1px solid #ddd;"><strong>Service:</strong></td>
-								<td style="padding: 10px; border-bottom: 1px solid #ddd;">${selectedPackagesInfo}</td>
+								<td style="padding: 10px; border-bottom: 1px solid #ddd;">${selectedPackageNames}</td>
 							</tr>
 							${addonsHtml}
 							<tr>

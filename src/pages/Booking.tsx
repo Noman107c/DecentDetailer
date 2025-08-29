@@ -181,18 +181,18 @@ const handleSelectChange = (name: string, value: string) => {
       }
       
       // Selected services
-      formData.selectedServices.forEach((service, index) => {
+      formData.selectedServices.forEach((service, id) => {
         const serviceType = serviceTypes.find(s => s.id === service.serviceType);
         const packageInfo = serviceType?.packages.find(p => p.id === service.package);
-        formspreeData.append(`service_${index + 1}_type`, serviceType?.name || '');
-        formspreeData.append(`service_${index + 1}_package`, packageInfo?.name || '');
-        formspreeData.append(`service_${index + 1}_price1`, packageInfo?.price || '');
+        formspreeData.append(`service_${id + 1}_type`, serviceType?.name || '');
+        formspreeData.append(`service_${id + 1}_package`, packageInfo?.name || '');
+        formspreeData.append(`service_${id + 1}_price1`, packageInfo?.price || '');
       });
       
       // Additional services
-      formData.additionalServices.forEach((serviceId, index) => {
+      formData.additionalServices.forEach((serviceId, id) => {
         const service = additionalServices.find(s => s.id === serviceId);
-        formspreeData.append(`addon_${index + 1}`, `${service?.name} (${service?.price})`);
+        formspreeData.append(`addon_${id + 1}`, `${service?.name} (${service?.price})`);
       });
       
       // Additional notes
@@ -204,7 +204,7 @@ let totalPrice = 0;
 
 // Selected services
 formData.selectedServices.forEach((service, index) => {
-  const serviceType = serviceTypes.find(s => s.id === service.serviceType);
+  const serviceType = serviceTypes.find(s => s.name === service.serviceType);
   const packageInfo = serviceType?.packages.find(p => p.id === service.package);
 
   // Ensure numeric value
@@ -332,8 +332,8 @@ formspreeData.append("total_price", totalPrice.toString());
       <div className="text-sm">
         <p className="font-medium mb-2">Services Selected:</p>
         <ul className="mb-3 space-y-1">
-          {selectedPackageNames.map((name, index) => (
-            <li key={index} className="flex items-start">
+          {selectedPackageNames.map((name, id) => (
+            <li key={id} className="flex items-start">
               <Check size={16} className="mr-1 text-green-500 mt-0.5 flex-shrink-0" />
               <span>{name}</span>
             </li>
@@ -343,8 +343,8 @@ formspreeData.append("total_price", totalPrice.toString());
           <>
             <p className="font-medium mb-2">Add-on Services:</p>
             <ul className="mb-3 space-y-1">
-              {additionalServiceNames.map((name, index) => (
-                <li key={index} className="flex items-start">
+              {additionalServiceNames.map((name, id) => (
+                <li key={id} className="flex items-start">
                   <Check size={16} className="mr-1 text-green-500 mt-0.5 flex-shrink-0" />
                   <span>{name}</span>
                 </li>
@@ -491,11 +491,11 @@ formspreeData.append("total_price", totalPrice.toString());
                         <div className="bg-blue-50 p-4 rounded-lg">
                           <h3 className="text-lg font-medium text-decent-blue mb-3">Your Selected Services</h3>
                           <div className="space-y-2">
-                            {formData.selectedServices.map((service, index) => {
+                            {formData.selectedServices.map((service, id) => {
                               const serviceInfo = getServiceTypeDetails(service.serviceType);
                               const packageInfo = getPackageDetails(service.serviceType, service.package);
                               return (
-                                <div key={index} className="flex justify-between items-center bg-white p-3 rounded border">
+                                <div key={id} className="flex justify-between items-center bg-white p-3 rounded border">
                                   <div>
                                     <p className="font-medium">{serviceInfo?.name}</p>
                                     <p className="text-sm text-gray-600">{packageInfo?.name} - {packageInfo?.price}</p>
@@ -897,19 +897,19 @@ formspreeData.append("total_price", totalPrice.toString());
                       </div>
 
                       {/* Hidden form fields */}
-                      {formData.selectedServices.map((service, index) => {
+                      {formData.selectedServices.map((service, id) => {
                         const serviceType = serviceTypes.find(s => s.id === service.serviceType);
                         const packageInfo = serviceType?.packages.find(p => p.id === service.package);
                         return (
-                          <div key={`hidden-service-${index}`} style={{ display: 'none' }}>
+                          <div key={`hidden-service-${id}`} style={{ display: 'none' }}>
                             <input 
                               type="hidden" 
-                              name={`service_${index + 1}_type`}
+                              name={`service_${id + 1}_type`}
                               value={serviceType?.name || ''}
                             />
                             <input 
                               type="hidden" 
-                              name={`service_${index + 1}_package`}
+                              name={`service_${id + 1}_package`}
                               value={packageInfo?.name || ''}
                             />
                           </div>
@@ -926,11 +926,11 @@ formspreeData.append("total_price", totalPrice.toString());
                       <div className="bg-gray-50 p-4 rounded-lg">
                         <h3 className="text-lg font-medium text-decent-blue mb-3">Order Summary</h3>
                         <div className="space-y-2">
-                          {formData.selectedServices.map((service, index) => {
+                          {formData.selectedServices.map((service, id) => {
                             const serviceInfo = getServiceTypeDetails(service.serviceType);
                             const packageInfo = getPackageDetails(service.serviceType, service.package);
                             return (
-                              <div key={index} className="flex justify-between">
+                              <div key={id} className="flex justify-between">
                                 <span>{serviceInfo?.name} - {packageInfo?.name}</span>
                                 <span className="font-medium">{packageInfo?.price}</span>
                               </div>
@@ -939,10 +939,10 @@ formspreeData.append("total_price", totalPrice.toString());
                           {formData.additionalServices.length > 0 && (
                             <>
                               <div className="border-t border-gray-200 my-2"></div>
-                              {formData.additionalServices.map((serviceId, index) => {
+                              {formData.additionalServices.map((serviceId, id) => {
                                 const service = additionalServices.find(s => s.id === serviceId);
                                 return (
-                                  <div key={index} className="flex justify-between">
+                                  <div key={id} className="flex justify-between">
                                     <span>{service?.name}</span>
                                     <span className="font-medium">{service?.price}</span>
                                   </div>
