@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { ChevronRight } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 import {
   Carousel,
@@ -156,9 +157,11 @@ const FeaturedWorks = () => {
                       <div className="grid grid-cols-2 gap-1">
                         {/* Before */}
                         <div className="relative group">
-                          <img
+                          <Image
                             src={item.before}
                             alt={`Before ${item.title}`}
+                            width={400}
+                            height={256}
                             className="w-full h-64 object-cover transition-all duration-700 filter group-hover:brightness-90"
                           />
                           <div className="absolute top-4 left-4 bg-black/90 text-white px-4 py-1 text-sm rounded-full shadow-md">
@@ -167,9 +170,11 @@ const FeaturedWorks = () => {
                         </div>
                         {/* After */}
                         <div className="relative group">
-                          <img
+                          <Image
                             src={item.after}
                             alt={`After ${item.title}`}
+                            width={400}
+                            height={256}
                             className="w-full h-64 object-cover transition-all duration-700 filter group-hover:brightness-110"
                           />
                           <div className="absolute top-4 right-4 bg-decent-blue text-white px-4 py-1 text-sm rounded-full shadow-md">
@@ -187,8 +192,7 @@ const FeaturedWorks = () => {
                             variant="link"
                             className="text-decent-lightBlue p-0 mt-2 hover:text-decent-blue transition-colors"
                           >
-                            View Details{" "}
-                            <ChevronRight className="ml-1 h-4 w-4" />
+                            View Details <ChevronRight className="ml-1 h-4 w-4" />
                           </Button>
                         </Link>
                       </div>
@@ -212,9 +216,11 @@ const FeaturedWorks = () => {
                         <div className="grid grid-cols-2 gap-1">
                           {/* Before */}
                           <div className="relative">
-                            <img
+                            <Image
                               src={item.before}
                               alt={`Before ${item.title}`}
+                              width={200}
+                              height={192}
                               className="w-full h-48 object-cover"
                             />
                             <div className="absolute top-2 left-2 bg-black/90 text-white px-3 py-1 text-xs rounded-full">
@@ -223,9 +229,11 @@ const FeaturedWorks = () => {
                           </div>
                           {/* After */}
                           <div className="relative">
-                            <img
+                            <Image
                               src={item.after}
                               alt={`After ${item.title}`}
+                              width={200}
+                              height={192}
                               className="w-full h-48 object-cover"
                             />
                             <div className="absolute top-2 right-2 bg-decent-blue text-white px-3 py-1 text-xs rounded-full">

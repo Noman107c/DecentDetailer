@@ -1,6 +1,6 @@
 import Navbar from "@/components/Navbar";
-
 import { Wrench, Car, Check, Users, Award, Clock } from "lucide-react";
+import Image from "next/image";
 
 const About = () => {
   return (
@@ -40,10 +40,13 @@ const About = () => {
             
             <div className="relative">
               <div className="rounded-xl overflow-hidden shadow-xl">
-                <img 
-                  src="about_us.jpg"
+                <Image 
+                  src="/about_us.jpg"
                   alt="Car detailing professional at work" 
+                  width={700}
+                  height={420}
                   className="w-full h-[420px] object-cover"
+                  priority
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
               </div>
@@ -87,8 +90,6 @@ const About = () => {
           </div>
         </div>
       </div>
-
-   
     </div>
   );
 };

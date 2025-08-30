@@ -1,5 +1,6 @@
 import { Wrench, Car, Check, Users } from "lucide-react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 const AboutSection = () => {
   const fadeInUpVariants = {
@@ -166,10 +167,13 @@ const AboutSection = () => {
               className="rounded-2xl overflow-hidden shadow-2xl border-4 border-white"
               whileHover={{ scale: 1.03, transition: { duration: 0.3 } }}
             >
-              <img 
-                src="slider_1.png"
+              <Image 
+                src="/slider_1.png"
                 alt="Car detailing professional at work" 
+                width={400}
+                height={340}
                 className="w-[400px] h-[340px] object-cover"
+                priority
               />
             </motion.div>
           </motion.div>

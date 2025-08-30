@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 import { Check, Car, Truck, Zap } from "lucide-react";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import Navbar from "@/components/Navbar";
+import Image from "next/image";
 
 const Services = () => {
   const [activeTab, setActiveTab] = useState("car-detailing");
@@ -13,12 +14,23 @@ const Services = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
 
-  const serviceCategories = {
+  const serviceCategories: Record<
+    string,
+    {
+      title: string;
+      description: string;
+      image: string;
+      sections: {
+        title: string;
+        packages: { name: string; price: string; features: string[] }[];
+      }[];
+    }
+  > = {
     "car-detailing": {
       title: "Car Detailing Packages",
       description:
         "Professional detailing services for your car, customized to your needs.",
-      image: "slider_1.png",
+      image: "/slider_1.png",
       sections: [
         {
           title: "Exterior Packages",
@@ -78,7 +90,7 @@ const Services = () => {
       title: "RV & Boat Packages",
       description:
         "Specialized cleaning and detailing for larger vehicles, priced per foot.",
-      image: "boat.png",
+      image: "/boat.png",
       sections: [
         {
           title: "RV/Boat Packages (Price per foot)",
@@ -122,7 +134,7 @@ const Services = () => {
       description:
         "Tailored detailing services for motorcycles, ATVs, and other specialty vehicles.",
       image:
-        "https://images.unsplash.com/photo-1558981852-426c6c22a060?q=80&w=1000&auto=format&fit=crop",
+        "/bike.jpg",
       sections: [
         {
           title: "Specialty Vehicle Packages",
@@ -155,7 +167,7 @@ const Services = () => {
       title: "Add-On Services",
       description:
         "Enhance your detailing package with these premium add-on services.",
-      image: "adds_on.jpg",
+      image: "/adds_on.jpg",
       sections: [
         {
           title: "Exterior Enhancements",
@@ -296,10 +308,13 @@ const Services = () => {
                   <div className="sticky top-24 hidden lg:block">
                     <div className="rounded-xl overflow-hidden shadow-lg">
                       <AspectRatio ratio={16 / 10}>
-                        <img
+                        <Image
                           src={category.image}
                           alt={category.title}
+                          fill
                           className="w-full h-full object-cover"
+                          sizes="(min-width: 1024px) 50vw, 100vw"
+                          priority={key === "car-detailing"}
                         />
                       </AspectRatio>
                     </div>

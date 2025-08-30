@@ -1,8 +1,8 @@
-
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { Menu, X, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -33,12 +33,13 @@ const Navbar = () => {
     >
       <div className="container mx-auto flex justify-between items-center px-4">
         <Link href="/" className="flex items-center">
-          <img
+          <Image
             src="/lovable-uploads/0d2360a7-2b5e-482b-881c-8b268207b1db.png"
             alt="Decent Detailers Logo"
-            className={`transition-all duration-300 ${
-              isScrolled ? "h-12" : "h-16"
-            }`}
+            width={isScrolled ? 72 : 96}
+            height={isScrolled ? 48 : 64}
+            className={`transition-all duration-300 ${isScrolled ? "h-12" : "h-16"}`}
+            priority
           />
         </Link>
 
