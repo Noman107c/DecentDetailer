@@ -32,7 +32,7 @@ const Hero = () => {
   }
 
   return (
-    <div className="relative min-h-[90vh] overflow-hidden bg-decent-dark">
+    <div id="hero-section" className="relative min-h-[90vh] overflow-hidden bg-decent-dark">
       {/* Background overlay and gradient */}
       <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/70 to-black/50 z-10" />
 
