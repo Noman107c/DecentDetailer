@@ -1,6 +1,6 @@
-
 import Link from "next/link";
 import { Phone, Mail, MapPin, Clock, Facebook, Instagram, Twitter } from "lucide-react";
+import Image from "next/image";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -11,10 +11,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Company Info */}
           <div className="flex flex-col items-center md:items-start">
-            <img
+            <Image
               src="/lovable-uploads/0d2360a7-2b5e-482b-881c-8b268207b1db.png"
               alt="Decent Detailers Logo"
+              width={120}
+              height={80}
               className="h-20 mb-4"
+              priority
             />
             <p className="text-decent-silver mb-4 text-center md:text-left">
               Bringing showroom-quality results directly to your doorstep with 9+ years of expertise.

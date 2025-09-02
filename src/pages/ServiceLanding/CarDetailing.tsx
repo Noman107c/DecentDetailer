@@ -1,4 +1,3 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Check, ArrowRight } from "lucide-react";
@@ -6,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 
 const CarDetailing = () => {
   return (
@@ -57,10 +57,13 @@ const CarDetailing = () => {
                 transition={{ duration: 0.7, delay: 0.2 }}
               >
                 <div className="rounded-lg overflow-hidden shadow-xl">
-                  <img 
-                    src="interior_after.png" 
-                    alt="Professional car detailing service" 
+                  <Image
+                    src="/exterior_after.png"
+                    alt="Professional car detailing service"
+                    width={600}
+                    height={400}
                     className="w-full h-auto"
+                    priority
                   />
                 </div>
               </motion.div>
@@ -219,7 +222,7 @@ const CarDetailing = () => {
           </div>
         </div>
       </div>
-   
+      <Footer />
     </>
   );
 };

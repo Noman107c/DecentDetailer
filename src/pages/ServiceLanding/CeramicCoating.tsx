@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Image from "next/image";
 
 const CeramicCoating = () => {
   return (
@@ -63,10 +64,13 @@ const CeramicCoating = () => {
                 transition={{ duration: 0.7, delay: 0.2 }}
               >
                 <div className="rounded-lg overflow-hidden shadow-xl">
-                  <img
-                    src="ceramic_after.png"
+                  <Image
+                    src="/window_after.png"
                     alt="Professional ceramic coating service"
+                    width={600}
+                    height={400}
                     className="w-full h-auto"
+                    priority
                   />
                 </div>
               </motion.div>

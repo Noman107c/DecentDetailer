@@ -1,5 +1,5 @@
-
 import { Star } from "lucide-react";
+import Image from "next/image";
 
 interface TestimonialCardProps {
   name: string;
@@ -21,9 +21,11 @@ const TestimonialCard = ({
       <div className="flex items-center mb-4">
         <div className="flex-shrink-0 mr-3">
           {image ? (
-            <img
+            <Image
               src={image}
               alt={name}
+              width={40}
+              height={40}
               className="w-10 h-10 rounded-full object-cover"
             />
           ) : (

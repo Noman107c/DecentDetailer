@@ -1,4 +1,3 @@
-
 import Link from "next/link";
 import { Star, Car, MapPin, Clock, Shield } from "lucide-react";
 import { motion } from "framer-motion";
@@ -6,6 +5,7 @@ import { MotionButton } from "@/components/ui/motion-button";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import FeatureCard from "./FeatureCard";
+import Image from "next/image";
 
 const HeroContent = () => {
   const isMobile = useIsMobile();
@@ -168,11 +168,14 @@ const HeroContent = () => {
             whileHover={{ scale: 1.03 }}
           >
             <AspectRatio ratio={16/9} className="w-[240px]">
-              <img 
-                src="https://images.unsplash.com/photo-1600979576531-397b9a3fee72?q=80&w=600&auto=format&fit=crop" 
-                alt="Car detailing result" 
+              <Image
+                src="https://images.unsplash.com/photo-1600979576531-397b9a3fee72?q=80&w=600&auto=format&fit=crop"
+                alt="Car detailing result"
+                fill
                 className="object-cover w-full h-full"
                 loading="eager"
+                sizes="(max-width: 640px) 100vw, 240px"
+                style={{ objectFit: "cover" }}
               />
             </AspectRatio>
           </motion.div>
