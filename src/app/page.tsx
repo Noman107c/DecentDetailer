@@ -11,7 +11,7 @@ import ProcessSection from "@/components/ProcessSection";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import DiscountModal from "@/components/DiscountModal";
-import discountData from "@/data/discountData.json";
+import discountData from "@/Data/discountData.json";
 
 // utility functions
 const shouldShowModal = () => {
