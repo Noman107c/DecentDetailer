@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
   title: 'Decent Detailers - Premium Mobile Car Detailing',
   description: 'Professional mobile car detailing services. We bring the detailing to you with premium quality and convenience.',
+  viewport: 'width=device-width, initial-scale=1',
 }
 
 export default function RootLayout({
@@ -17,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
         <ClientProviders>
           {children}
